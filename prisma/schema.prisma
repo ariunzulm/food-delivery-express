@@ -46,10 +46,10 @@ model FoodCategory{
 model FoodOrder{
   id Int @id @default(autoincrement()) @unique
   totalPrice String
-  status String
 
   foodOrderItems FoodOrderItem[]
 
+  status FoodOrderStatusEnum     @default(PENDING) 
   createdAt DateTime @default(now())
   updatedAt     DateTime? @updatedAt
 }
@@ -64,6 +64,7 @@ model FoodOrderItem{
   order FoodOrder @relation(fields: [foodOrderId], references: [id])
   foodOrderId Int
 
+  
   createdAt DateTime @default(now())
   updatedAt     DateTime? @updatedAt
 }
