@@ -8,7 +8,7 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "Email and password are required" });
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log("agvgbgbgfbfgbgfbfg", hashedPassword);
+  
   try {
     const user = await prisma.user.create({
       data: {
