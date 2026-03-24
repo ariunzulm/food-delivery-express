@@ -3,7 +3,6 @@ import FoodCard from "./FoodCard";
 
 const FoodsCardListing = async () => {
   const categories = await getCategories();
-  console.log("vdafoirnevbciurevhh");
 
   return (
     <div className="my-4">

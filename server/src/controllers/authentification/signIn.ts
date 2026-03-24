@@ -34,7 +34,7 @@ export const signIn = async (req: Request, res: Response) => {
           data: {
             email: userMatched.email,
             password: userMatched.password,
-            Role: userMatched.role,
+            role: userMatched.role,
           },
         },
         jwtSecret,

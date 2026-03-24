@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./components/theme-provider";
+import {
+  Sidebar,
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
+import { SidebarMenu } from "./components/SideBarMenu";
 import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
-import { ThemeProvider } from "./components/theme-provider";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +43,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navigation /> {children} <Footer />
+            <main>
+              <Navigation />
+              {children}
+              <Footer />
+            </main>
           </ThemeProvider>
         </body>
       </html>

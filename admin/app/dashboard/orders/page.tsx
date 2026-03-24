@@ -1,0 +1,191 @@
+import { getOrders } from "@/app/lib/servers/get-Orders";
+import { getUsers } from "@/app/lib/servers/get-users";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Ban,
+  ClockArrowDown,
+  CreditCardIcon,
+  LogOutIcon,
+  PackageCheck,
+  SettingsIcon,
+  UserIcon,
+} from "lucide-react";
+
+const tableColumns = [
+  "№",
+  "Customer",
+  "Food",
+  "Ordered Date",
+  "Total",
+  "Delivery Address",
+  "Delivery Status",
+];
+
+const FoodMenuTable = async () => {
+  const { users } = await getUsers();
+  const order = await getOrders();
+  console.log(users, "users");
+  return (
+    <Table className="">
+      <TableHeader>
+        <TableRow>
+          {tableColumns.map((title) => {
+            return (
+              <TableHead
+                className="font-extrabold, text-lg text-orange-700"
+                key={title}
+              >
+                {title}
+              </TableHead>
+            );
+          })}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {users.map((user, index) => {
+          return (
+            <TableRow key={index}>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>
+                {user.foodOrder.map((order) =>
+                  order.foodOrderItems.map(
+                    (item) => item.quantity.toString().split(" ")[0],
+                  ),
+                )}
+              </TableCell>
+              <TableCell>
+                {user.foodOrder.map((order) =>
+                  new Date(order.createdAt).toLocaleString(),
+                )}
+              </TableCell>
+              <TableCell>
+                {user.foodOrder.map((order) => {
+                  return <div key={order.id}>$ {order.totalPrice}</div>;
+                })}
+              </TableCell>
+              <TableCell>
+                {user.foodOrder.map((order) => {
+                  return <div key={order.id}>{order.id} address</div>;
+                })}
+              </TableCell>
+              <TableCell>
+                <DropdownMenuIcons />
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  );
+};
+
+export default FoodMenuTable;
+
+export const DropdownMenuIcons = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <div>
+          <Status />
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem>
+          <ClockArrowDown />
+          PENDING
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <PackageCheck />
+          DELIVERED
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Ban />
+          CANCELED
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+export const Status = async () => {
+  const { users } = await getUsers();
+  return (
+    <Dialog>
+      <form>
+        <DialogTrigger>
+          {<Button variant="outline">PENDING</Button>}
+        </DialogTrigger>
+
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="uppercase">
+              Change Delivery State
+            </DialogTitle>
+          </DialogHeader>
+          <DialogDescription>
+            {users.map((user) =>
+              user.foodOrder.map((order) => (
+                <div
+                  key={order.id}
+                  className="border border-red-50 w-fit flex justify-between"
+                >
+                  {order.status}
+                </div>
+              )),
+            )}
+          </DialogDescription>
+          <DialogFooter>
+            <DialogClose>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </form>
+    </Dialog>
+  );
+};
+
+//   const pureData = users.map((user) => {
+//     if (user.foodOrder.length === 0) {
+//       user.foodOrder = []
+//     }
+
+//     const clean = {
+//       email: user.email,
+//       id: user.id,
+//       totalPrice: user.foodOrder[0].totalPrice,
+//       orderStatus: user.foodOrder[0].status,
+//       orderDate: user.foodOrder[0].createdAt,
+//       foodOrderItem: user.foodOrder[0].foodOrderItems,
+//     };
+
+//     return clean;
+//   });

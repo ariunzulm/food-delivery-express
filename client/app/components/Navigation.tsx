@@ -29,7 +29,7 @@ const Navigation = () => {
           <div className="w-10 h-10 rounded-full bg-red-500 border border-red-500/30 flex items-center justify-center cursor-pointer">
             <User className="w-5 h-5 text-zinc-200" />
           </div>
-          <ModeToggle />
+          <ModeToggle/>
         </div>
       </nav>
     </header>

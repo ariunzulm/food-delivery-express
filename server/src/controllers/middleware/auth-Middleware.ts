@@ -15,16 +15,17 @@ const authMiddleware = async (
 
   const accessToken = authorization?.split(" ")[1];
 
-  const jwtSecret = process.env.JWT_SECRET;
-  if (!jwtSecret) {
+  const jwtSecret = process.env.JWT_SECRET!;
+
+  if (!accessToken) {
     return res.status(500).json({ message: "Token is not configured" });
   }
   try {
     const decoded = jwt.verify(accessToken, jwtSecret) as TokenType;
 
     req.user = decoded.data;
-    res.status(200).json({ message: "Valid authentification" });
-    
+    // res.status(200).json({ message: "Valid authentification??" });
+
     next();
   } catch (error) {
     console.log(error);

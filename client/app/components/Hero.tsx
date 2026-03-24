@@ -4,8 +4,6 @@ const Hero = () => {
   return (
     <section className="relative w-full overflow-hidden bg-[#f5ede0] max-h-105">
       <div className="relative w-full h-105 bg-cover bg-center bg-no-repeat bg-[url(/hero-bg.svg)]">
-        <div className="relative z-10 flex items-center justify-center h-full"></div>
-
         <div className="absolute top-1/4 left-0 w-7/8 h-55 bg-[#181818] rounded-r-full z-2" />
         <div className="absolute top-2/7 left-0 w-8/9 h-55 bg-[#FD543F] rounded-r-full z-1" />
 
@@ -25,7 +23,7 @@ const Hero = () => {
             </div>
             <div className="absolute z-10 top-28 left-20 w-75 h-18 -translate-y-[20%] rounded-full bg-white"></div>
           </div>
-          <div className="absolute  z-20 -top-30 right-26 w-80 -translate-y-[20%]">
+          <div className="absolute z-20 -top-30 right-26 w-80 -translate-y-[20%]">
             <img
               src="/hero-plate.png"
               alt="Today's featured dish"

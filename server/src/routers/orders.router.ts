@@ -6,14 +6,17 @@ import { updatedOrderById } from "../controllers/orders/update-order";
 import { getOrderByUser } from "../controllers/orders/get-order-by-id-User";
 import authMiddleware from "../controllers/middleware/auth-Middleware";
 import adminMiddleware from "../controllers/middleware/admin-Middleware";
+import { getOrderById } from "../controllers/orders/get-order-by-id";
 
 const router = express.Router();
 
 router.get("/", authMiddleware, adminMiddleware, getOrders);
-// router.get("/:id", authMiddleware, adminMiddleware, getOrderById);
+router.get("/:id", authMiddleware, adminMiddleware, getOrderById);
 router.post("/", authMiddleware, createNewOrder);
+// router.post("/", createNewOrder);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteOrderById);
 router.put("/:id", authMiddleware, adminMiddleware, updatedOrderById);
+// router.put("/:id", updatedOrderById);
 
 router.get("/:id", authMiddleware, getOrderByUser);
 

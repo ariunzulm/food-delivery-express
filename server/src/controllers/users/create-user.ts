@@ -8,7 +8,7 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "Email and password are required" });
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  
+
   try {
     const user = await prisma.user.create({
       data: {
@@ -16,6 +16,7 @@ export const createUser = async (req: Request, res: Response) => {
         password: hashedPassword,
         phoneNumber,
         age,
+        role,
       },
     });
     res.status(200).json({ message: "A user created successfully", user });

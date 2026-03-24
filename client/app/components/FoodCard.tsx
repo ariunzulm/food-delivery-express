@@ -1,8 +1,7 @@
 "use client";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Play, Square, SquarePlus, Star } from "lucide-react";
+import { SquarePlus } from "lucide-react";
 
 type FoodCardProps = {
   price: string;
