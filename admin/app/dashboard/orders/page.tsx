@@ -47,7 +47,7 @@ const tableColumns = [
   "Delivery Status",
 ];
 
-const FoodMenuTable = async () => {
+const OrdersPage = async () => {
   const { users } = await getUsers();
   const order = await getOrders();
   console.log(users, "users");
@@ -106,15 +106,13 @@ const FoodMenuTable = async () => {
   );
 };
 
-export default FoodMenuTable;
+export default OrdersPage;
 
 export const DropdownMenuIcons = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div>
-          <Status />
-        </div>
+        <div>{/* <Status /> */}Status </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
@@ -145,9 +143,7 @@ export const Status = async () => {
 
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle className="uppercase">
-              Change Delivery State
-            </DialogTitle>
+            <DialogTitle className="uppercase"></DialogTitle>
           </DialogHeader>
           <DialogDescription>
             {users.map((user) =>

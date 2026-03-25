@@ -14,10 +14,10 @@ export function AppSidebar() {
 
   return (
     <Sidebar variant="floating">
-      <SidebarContent>
+      <SidebarContent className="p-4">
         <NomNomLogo />
 
-        <Tabs defaultValue="menu" className="flex flex-col p-4 gap-4">
+        <Tabs defaultValue="menu" className="flex flex-col gap-4">
           <TabsList>
             <Link href={`/dashboard/foods`}>
               <TabsTrigger
@@ -39,9 +39,9 @@ export function AppSidebar() {
           </TabsList>
 
           <TabsContent value="menu">
-            Make changes to your account here.
+           Food Menu
           </TabsContent>
-          <TabsContent value="orders">Change your password here.</TabsContent>
+          <TabsContent value="orders">Food Orders</TabsContent>
         </Tabs>
       </SidebarContent>
     </Sidebar>

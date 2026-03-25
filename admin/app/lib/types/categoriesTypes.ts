@@ -1,3 +1,5 @@
+export type Categories = Category[];
+
 export type Food = {
   id: number;
   foodName: string;
