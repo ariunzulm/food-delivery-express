@@ -1,10 +1,8 @@
-import { getCategories } from "@/app/lib/servers/get-Categies";
 import { Button } from "@/components/ui/button";
 import AddCategory from "./AddCategory";
+import { CategoriesProps } from "../page";
 
-const AddedCategoryPage = async () => {
-  const categories = await getCategories();
-
+const AddedCategoryPage = ({ categories }: CategoriesProps) => {
   return (
     <div className="p-4 bg-zinc-800 text-red-500 w-full rounded-lg outline-1 space-y-2">
       <h2>Dishes Categories</h2>
@@ -24,7 +22,7 @@ const AddedCategoryPage = async () => {
             </div>
           );
         })}
-        <AddCategory />
+        <AddCategory categories={categories} />
       </div>
     </div>
   );

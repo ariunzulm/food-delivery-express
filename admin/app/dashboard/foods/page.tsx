@@ -1,12 +1,18 @@
-import AddCategoryButton from "./_components/AddCategory";
+import { getCategories } from "@/app/lib/servers/get-Categies";
 import AddedCategoryPage from "./_components/AddedCategoryPage";
 import AddedFoodsPage from "./_components/AddedFoodsPage";
+import { Category } from "@/app/lib/types/categoriesTypes";
 
-const FoodMenuPage = () => {
+export type CategoriesProps = {
+  categories: Category[];
+};
+
+const FoodMenuPage = async () => {
+  const categories = await getCategories();
   return (
     <section className="min-h-screen w-full p-4">
-      <AddedCategoryPage />
-      <AddedFoodsPage />
+      <AddedCategoryPage categories={categories} />
+      <AddedFoodsPage categories={categories} />
     </section>
   );
 };

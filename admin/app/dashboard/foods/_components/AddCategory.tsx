@@ -14,8 +14,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { CategoriesProps } from "../page";
 
-const AddCategory = () => {
+const AddCategory = ({ categories }: CategoriesProps) => {
   const [newCategory, setNewCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);

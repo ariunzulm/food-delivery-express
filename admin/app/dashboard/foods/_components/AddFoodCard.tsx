@@ -1,5 +1,5 @@
 "use client";
-import { Plus } from "lucide-react";
+import { LoaderCircle, Plus } from "lucide-react";
 import { ChangeEventHandler, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -13,23 +13,69 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Category } from "@/app/lib/types/categoriesTypes";
+import { useRouter } from "next/navigation";
 
-export type AddCardProps = {
-  categoryName: string;
+type AddFoodCardProps = {
+  category: Category;
 };
-const AddFoodCard = ({ categoryName }: AddCardProps) => {
-  const [addedCategory, setAddedCategory] = useState("");
+type NewCategoryProps = {
+  foodName: string;
+  price: string;
+  ingredients: string;
+  image: string;
+  foodCategoryId: number | null;
+};
 
-  const onChangeAddButton: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setAddedCategory(event.target.value);
+const AddFoodCard = ({ category }: AddFoodCardProps) => {
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const [newCategory, setNewCategory] = useState<NewCategoryProps>({
+    foodName: "",
+    price: "",
+    ingredients: "",
+    image: "",
+    foodCategoryId: null,
+  });
+
+  const onHandleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const { name, value } = event.target;
+
+    setNewCategory((prev) => ({ ...prev, [name]: value }));
+    console.log({ ...newCategory, [name]: value });
+  };
+
+  const onAddFoodCard = async () => {
+    setLoading(true);
+    try {
+      await fetch("http://localhost:3000/foods", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          foodName: newCategory.foodName,
+          price: newCategory.price,
+          image: newCategory.image,
+          ingredients: newCategory.ingredients,
+          foodCategoryId:newCategory.foodCategoryId
+        }),
+      });
+      router.refresh();
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(true);
   };
 
   return (
     <section className="group relative w-full flex items-center justify-center flex-col gap-3 overflow-hidden border border-zinc-100 p-2 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 bg-white dark:bg-zinc-900">
       <h3 className="text-base text-center font-bold leading-tight text-red-500">
-        Add new Dish to {categoryName.toUpperCase()}
+        Add new Dish to {category.categoryName}
       </h3>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger>
           <div className="rounded-full p-2 w-fit bg-red-500 hover:bg-red-400 text-white transition-colors cursor-pointer">
             <Plus />
@@ -38,8 +84,8 @@ const AddFoodCard = ({ categoryName }: AddCardProps) => {
 
         <DialogContent className="sm:max-w-md p-4">
           <DialogHeader>
-            <DialogTitle className="uppercase">
-              Add new Dish to Appetizers
+            <DialogTitle className="text-base text-center font-bold leading-tight text-red-500">
+              Add new Dish to {category.categoryName}
             </DialogTitle>
           </DialogHeader>
 
@@ -51,7 +97,8 @@ const AddFoodCard = ({ categoryName }: AddCardProps) => {
                     Food name
                   </Label>
                   <Input
-                    onChange={onChangeAddButton}
+                    name="foodName"
+                    onChange={onHandleChange}
                     type="text"
                     id="foodName"
                     placeholder="Type your food name"
@@ -61,7 +108,13 @@ const AddFoodCard = ({ categoryName }: AddCardProps) => {
                   <Label htmlFor="price" className="">
                     Food price
                   </Label>
-                  <Input type="text" id="price" placeholder="Enter price" />
+                  <Input
+                    onChange={onHandleChange}
+                    name="price"
+                    type="text"
+                    id="price"
+                    placeholder="Enter price"
+                  />
                 </div>
               </div>
 
@@ -69,6 +122,8 @@ const AddFoodCard = ({ categoryName }: AddCardProps) => {
                 Ingredients
               </Label>
               <Input
+                onChange={onHandleChange}
+                name="ingredients"
                 type="text"
                 id="ingredients"
                 placeholder="List ingredients..."
@@ -77,7 +132,9 @@ const AddFoodCard = ({ categoryName }: AddCardProps) => {
                 Food image
               </Label>
               <Input
-                id="picture"
+                onChange={onHandleChange}
+                name="image"
+                id="image"
                 type="file"
                 className="w-105 h-35 text-center"
               />
@@ -85,11 +142,14 @@ const AddFoodCard = ({ categoryName }: AddCardProps) => {
           </div>
           <DialogFooter className="sm:justify-end">
             <Button
+              onClick={onAddFoodCard}
+              disabled={loading}
               type="button"
               className="bg-red-500 hover:bg-red-400 text-white"
             >
-              Add Dish
+              {loading ? <LoaderCircle className="animate-spin" /> : "Add Food"}
             </Button>
+            {/* <SonnerTypes /> */}
           </DialogFooter>
         </DialogContent>
       </Dialog>

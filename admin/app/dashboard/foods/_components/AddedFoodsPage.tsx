@@ -1,10 +1,8 @@
 import FoodCard from "@/app/components/FoodCard";
-import { getCategories } from "@/app/lib/servers/get-Categies";
 import AddFoodCard from "./AddFoodCard";
+import { CategoriesProps } from "../page";
 
-const AddedFoodsPage = async () => {
-  const categories = await getCategories();
-
+const AddedFoodsPage = ({ categories }: CategoriesProps) => {
   return (
     <div className="my-4">
       {categories.map((category) => {
@@ -18,7 +16,7 @@ const AddedFoodsPage = async () => {
             </h2>
 
             <div className="grid grid-cols-2 md:grid-cols-3  gap-6">
-              <AddFoodCard categoryName={category.categoryName} />
+              <AddFoodCard category={category} />
               {category.foods.map((food) => {
                 return (
                   <div key={food.id}>
