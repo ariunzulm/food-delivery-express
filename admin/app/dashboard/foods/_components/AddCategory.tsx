@@ -14,9 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { CategoriesProps } from "../page";
-
-const AddCategory = ({ categories }: CategoriesProps) => {
+import { Category } from "@/app/lib/types/categoriesTypes";
+type AddCategoryProps = {
+  categories: Category[];
+};
+const AddCategory = ({ categories }: AddCategoryProps) => {
   const [newCategory, setNewCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -25,6 +27,7 @@ const AddCategory = ({ categories }: CategoriesProps) => {
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setNewCategory(event.target.value);
   };
+  
   const onAddCategory = async () => {
     setLoading(true);
 

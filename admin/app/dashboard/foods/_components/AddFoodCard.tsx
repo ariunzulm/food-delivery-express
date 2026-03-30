@@ -1,25 +1,26 @@
 "use client";
-import { LoaderCircle, Plus } from "lucide-react";
-import { ChangeEventHandler, useState } from "react";
 
+import { LoaderCircle, Plus, X } from "lucide-react";
+import { ChangeEventHandler, useState } from "react";
+import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { Category } from "@/app/lib/types/categoriesTypes";
 import { useRouter } from "next/navigation";
+import { FoodCardInputs } from "./__component/FoodCardInputs";
+import { FoodCardHeader } from "./__component/FoodCardHeader";
 
 type AddFoodCardProps = {
   category: Category;
+  categories: Category[];
 };
-type NewCategoryProps = {
+type NewFoodProps = {
   foodName: string;
   price: string;
   ingredients: string;
@@ -27,11 +28,11 @@ type NewCategoryProps = {
   foodCategoryId: number | null;
 };
 
-const AddFoodCard = ({ category }: AddFoodCardProps) => {
+const AddFoodCard = ({ category, categories }: AddFoodCardProps) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const [newCategory, setNewCategory] = useState<NewCategoryProps>({
+  const [newFood, setNewFood] = useState<NewFoodProps>({
     foodName: "",
     price: "",
     ingredients: "",
@@ -42,24 +43,29 @@ const AddFoodCard = ({ category }: AddFoodCardProps) => {
   const onHandleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { name, value } = event.target;
 
-    setNewCategory((prev) => ({ ...prev, [name]: value }));
-    console.log({ ...newCategory, [name]: value });
+    setNewFood((prev) => ({ ...prev, [name]: value }));
+    console.log({ ...newFood, [name]: value });
+  };
+  const onSelectCategory = (foodCategoryId: number) => {
+    console.log(foodCategoryId, "fddddd vcfdvdfvdfvfd helllooif");
+    setNewFood({ ...newFood, foodCategoryId: foodCategoryId });
   };
 
   const onAddFoodCard = async () => {
     setLoading(true);
+
     try {
-      await fetch("http://localhost:3000/foods", {
+      await fetch("http://localhost:8787/foods", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          foodName: newCategory.foodName,
-          price: newCategory.price,
-          image: newCategory.image,
-          ingredients: newCategory.ingredients,
-          foodCategoryId:newCategory.foodCategoryId
+          foodName: newFood.foodName,
+          price: newFood.price,
+          image: newFood.image,
+          ingredients: newFood.ingredients,
+          foodCategoryId: category.id,
         }),
       });
       router.refresh();
@@ -67,7 +73,7 @@ const AddFoodCard = ({ category }: AddFoodCardProps) => {
     } catch (error) {
       console.log(error);
     }
-    setLoading(true);
+    setLoading(false);
   };
 
   return (
@@ -83,63 +89,14 @@ const AddFoodCard = ({ category }: AddFoodCardProps) => {
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-md p-4">
-          <DialogHeader>
-            <DialogTitle className="text-base text-center font-bold leading-tight text-red-500">
-              Add new Dish to {category.categoryName}
-            </DialogTitle>
-          </DialogHeader>
+          <FoodCardHeader category={category} />
+          <FoodCardInputs
+            onSelectCategory={onSelectCategory}
+            onHandleChange={onHandleChange}
+            categories={categories}
+            values={newFood}
+          />
 
-          <div className="flex items-center gap-2">
-            <div className="grid flex-1 gap-4">
-              <div className="flex justify-between">
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="foodName" className="">
-                    Food name
-                  </Label>
-                  <Input
-                    name="foodName"
-                    onChange={onHandleChange}
-                    type="text"
-                    id="foodName"
-                    placeholder="Type your food name"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="price" className="">
-                    Food price
-                  </Label>
-                  <Input
-                    onChange={onHandleChange}
-                    name="price"
-                    type="text"
-                    id="price"
-                    placeholder="Enter price"
-                  />
-                </div>
-              </div>
-
-              <Label htmlFor="ingredients" className="">
-                Ingredients
-              </Label>
-              <Input
-                onChange={onHandleChange}
-                name="ingredients"
-                type="text"
-                id="ingredients"
-                placeholder="List ingredients..."
-              />
-              <Label htmlFor="foodName" className="">
-                Food image
-              </Label>
-              <Input
-                onChange={onHandleChange}
-                name="image"
-                id="image"
-                type="file"
-                className="w-105 h-35 text-center"
-              />
-            </div>
-          </div>
           <DialogFooter className="sm:justify-end">
             <Button
               onClick={onAddFoodCard}
@@ -147,9 +104,12 @@ const AddFoodCard = ({ category }: AddFoodCardProps) => {
               type="button"
               className="bg-red-500 hover:bg-red-400 text-white"
             >
-              {loading ? <LoaderCircle className="animate-spin" /> : "Add Food"}
+              {loading ? (
+                <LoaderCircle className="animate-spin" />
+              ) : (
+                "Add Food "
+              )}
             </Button>
-            {/* <SonnerTypes /> */}
           </DialogFooter>
         </DialogContent>
       </Dialog>

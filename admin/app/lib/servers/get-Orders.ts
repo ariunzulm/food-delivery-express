@@ -6,7 +6,7 @@ type GetOrdersProps = {
 };
 export const getOrders = async () => {
   try {
-    const response = await fetch("http://localhost:3000/orders", options);
+    const response = await fetch("http://localhost:8787/orders", options);
 
     const data: GetOrdersProps = await response.json();
 

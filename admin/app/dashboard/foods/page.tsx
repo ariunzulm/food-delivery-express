@@ -3,12 +3,9 @@ import AddedCategoryPage from "./_components/AddedCategoryPage";
 import AddedFoodsPage from "./_components/AddedFoodsPage";
 import { Category } from "@/app/lib/types/categoriesTypes";
 
-export type CategoriesProps = {
-  categories: Category[];
-};
-
 const FoodMenuPage = async () => {
   const categories = await getCategories();
+
   return (
     <section className="min-h-screen w-full p-4">
       <AddedCategoryPage categories={categories} />

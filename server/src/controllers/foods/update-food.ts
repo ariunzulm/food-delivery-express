@@ -10,7 +10,7 @@ export const updateFoodById = async (req: Request, res: Response) => {
 
   const { foodName, price, image, ingredients, foodCategoryId } = req.body;
 
-  if (!foodName || !price || !foodCategoryId) {
+  if (!foodName || !price || !foodCategoryId || !ingredients) {
     return res
       .status(400)
       .json({ message: "foodName, price, and foodCategoryId are required" });

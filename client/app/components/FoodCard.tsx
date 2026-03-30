@@ -40,7 +40,7 @@ const FoodCard = ({ foodName, price }: FoodCardProps) => {
               variant="secondary"
               className="px-2 py-1 w-fit text-xs font-medium text-muted-foreground"
             >
-              389 ккал
+              category.name
             </Badge>
           </div>
 
