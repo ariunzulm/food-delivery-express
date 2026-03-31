@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8787;
 
 app.use(express.json());
 app.use(cors());
+
 app.use("/users", usersRouter);
 app.use("/categories", foodCatergoriesRouter);
 app.use("/foods", foodsRouter);

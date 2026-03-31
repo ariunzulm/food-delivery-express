@@ -1,13 +1,13 @@
 "use client";
 
-import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
-import { LoaderCircle, Plus, TrashIcon } from "lucide-react";
+import { Dialog, DialogFooter } from "@/components/ui/dialog";
+import { LoaderCircle, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Category, Food } from "@/app/lib/types/categoriesTypes";
 import { ChangeEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { UpdatedFoodCardInputs } from "./__component/FoodCardInputs copy";
+import { UpdatedFoodCardInputs } from "./__component/UpdatedFoodCardInputs";
 import { toast } from "react-toastify";
 import { FoodCardHeader } from "./__component/FoodCardHeader";
 
@@ -15,6 +15,7 @@ type UpdateFoodCardProps = {
   food: Food;
   categories: Category[];
   category: Category;
+  selectedCategory: number;
 };
 type UpdatedFoodProps = {
   foodName: string;
@@ -27,10 +28,12 @@ const UpdateFoodCard = ({
   food,
   categories,
   category,
+  selectedCategory,
 }: UpdateFoodCardProps) => {
   const [loading, setLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const router = useRouter();
+
   const { id, foodName, price, ingredients, image } = food;
 
   const [updatedFood, setUpdatedFood] = useState<UpdatedFoodProps>({
@@ -38,9 +41,9 @@ const UpdateFoodCard = ({
     price: food.price,
     ingredients: food.ingredients,
     image: food.image ?? "",
-    foodCategoryId: food.foodCategoryId,
+    foodCategoryId: selectedCategory && food.foodCategoryId,
   });
-
+  const router = useRouter();
   const onHandleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { name, value } = event.target;
     setUpdatedFood((prev) => ({ ...prev, [name]: value }));
@@ -83,7 +86,7 @@ const UpdateFoodCard = ({
     setLoading(false);
   };
   const onDeleteFood = async () => {
-    setLoading(true);
+    setDeleteLoading(true);
 
     try {
       await fetch(`http://localhost:8787/foods/${id}`, {
@@ -105,46 +108,46 @@ const UpdateFoodCard = ({
       });
       console.log(error);
     }
-    setLoading(false);
+    setDeleteLoading(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <div>
-        <FoodCardHeader category={category} />
-        <UpdatedFoodCardInputs
-          values={updatedFood}
-          categories={categories}
-          onHandleChange={onHandleChange}
-          onSelectCategory={onSelectCategory}
-        />
+      <FoodCardHeader category={category} />
+      <UpdatedFoodCardInputs
+        selectedCategory={selectedCategory}
+        values={updatedFood}
+        categories={categories}
+        onHandleChange={onHandleChange}
+        onSelectCategory={onSelectCategory}
+      />
 
-        <DialogFooter className="sm:justify-end">
-          <Button
-            disabled={loading}
-            onClick={onDeleteFood}
-            className="bg-red-500 hover:bg-red-400 text-white"
-          >
-            {loading ? (
-              <LoaderCircle className="animate-spin" />
-            ) : (
-              <TrashIcon />
-            )}
-          </Button>
-          <Button
-            onClick={onUpdatedFood}
-            disabled={loading}
-            type="button"
-            className="bg-red-500 hover:bg-red-400 text-white"
-          >
-            {loading ? (
-              <LoaderCircle className="animate-spin" />
-            ) : (
-              "Update the food"
-            )}
-          </Button>
-        </DialogFooter>
-      </div>
+      <DialogFooter className="sm:justify-between">
+        <Button
+          disabled={deleteLoading}
+          onClick={onDeleteFood}
+          className="bg-red-500 hover:bg-red-400 text-white"
+        >
+          {deleteLoading ? (
+            <LoaderCircle className="animate-spin" />
+          ) : (
+            <TrashIcon />
+          )}
+        </Button>
+
+        <Button
+          onClick={onUpdatedFood}
+          disabled={loading}
+          type="button"
+          className="bg-red-500 hover:bg-red-400 text-white"
+        >
+          {loading ? (
+            <LoaderCircle className="animate-spin" />
+          ) : (
+            "Update the food"
+          )}
+        </Button>
+      </DialogFooter>
     </Dialog>
   );
 };

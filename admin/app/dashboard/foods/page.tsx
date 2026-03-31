@@ -1,7 +1,6 @@
 import { getCategories } from "@/app/lib/servers/get-Categies";
 import AddedCategoryPage from "./_components/AddedCategoryPage";
 import AddedFoodsPage from "./_components/AddedFoodsPage";
-import { Category } from "@/app/lib/types/categoriesTypes";
 
 const FoodMenuPage = async () => {
   const categories = await getCategories();

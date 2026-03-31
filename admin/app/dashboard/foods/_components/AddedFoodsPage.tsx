@@ -8,7 +8,6 @@ type AddedFoodsPageProps = {
 };
 
 const AddedFoodsPage = ({ categories }: AddedFoodsPageProps) => {
-  console.log(categories, "addded");
   return (
     <div className="my-4">
       {categories.map((category) => {
@@ -19,12 +18,21 @@ const AddedFoodsPage = ({ categories }: AddedFoodsPageProps) => {
             </h2>
 
             <div className="grid">
-              <AddFoodCard category={category} categories={categories} />
+              <AddFoodCard
+                category={category}
+                categories={categories}
+                selectedCategory={category.id}
+              />
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {category.foods.map((food) => {
                   return (
                     <div key={food.id}>
-                      <FoodCard categories={categories} category={category} food={food} />
+                      <FoodCard
+                        selectedCategory={category.id}
+                        categories={categories}
+                        category={category}
+                        food={food}
+                      />
                     </div>
                   );
                 })}

@@ -168,20 +168,3 @@ export const Status = async () => {
     </Dialog>
   );
 };
-
-//   const pureData = users.map((user) => {
-//     if (user.foodOrder.length === 0) {
-//       user.foodOrder = []
-//     }
-
-//     const clean = {
-//       email: user.email,
-//       id: user.id,
-//       totalPrice: user.foodOrder[0].totalPrice,
-//       orderStatus: user.foodOrder[0].status,
-//       orderDate: user.foodOrder[0].createdAt,
-//       foodOrderItem: user.foodOrder[0].foodOrderItems,
-//     };
-
-//     return clean;
-//   });

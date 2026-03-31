@@ -7,6 +7,7 @@ import { Category } from "@/app/lib/types/categoriesTypes";
 type FoodNameProps = {
   onHandleChange: ChangeEventHandler<HTMLInputElement>;
   categories: Category[];
+  selectedCategory: number;
   values: {
     foodName: string;
     price: string;
@@ -20,6 +21,7 @@ export const FoodCardInputs = ({
   onHandleChange,
   categories,
   values,
+  selectedCategory,
   onSelectCategory,
 }: FoodNameProps) => {
   return (
@@ -48,7 +50,11 @@ export const FoodCardInputs = ({
         </div>
         <div className="flex justify-between">
           <Label htmlFor="categories">Dish categories</Label>
-          <CategoryDropDown categories={categories} onSelectCategory={onSelectCategory} />
+          <CategoryDropDown
+            selectedCategory={selectedCategory}
+            categories={categories}
+            onSelectCategory={onSelectCategory}
+          />
         </div>
         <Label htmlFor="ingredients">Ingredients</Label>
         <Input
@@ -65,7 +71,7 @@ export const FoodCardInputs = ({
           value={values.image}
           name="image"
           id="image"
-          type="text"
+          type="url"
           className="w-105 h-35 text-center"
           placeholder="Drag or drop a food image"
         />

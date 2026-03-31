@@ -27,7 +27,7 @@ const AddCategory = ({ categories }: AddCategoryProps) => {
   const onChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setNewCategory(event.target.value);
   };
-  
+
   const onAddCategory = async () => {
     setLoading(true);
 
@@ -37,7 +37,7 @@ const AddCategory = ({ categories }: AddCategoryProps) => {
     console.log(postBody, "body");
 
     try {
-      await fetch("http://localhost:3000/categories", {
+      await fetch("http://localhost:8787/categories", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const AddCategory = ({ categories }: AddCategoryProps) => {
             onClick={onAddCategory}
             disabled={loading}
             type="button"
-            className="bg-red-500 hover:bg-red-400 text-white"
+            className="bg-red-500 hover:bg-red-400 text-white cursor-pointer"
           >
             {loading ? (
               <LoaderCircle className="animate-spin" />

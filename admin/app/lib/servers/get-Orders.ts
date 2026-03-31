@@ -25,11 +25,4 @@ export const options = {
     accept: "application/json",
     Authorization: `Bearer ${token}`,
   },
-};
-
-//   method: "GET",
-//   headers: {
-//     accept: "application/json",
-//     Authorization: `Bearer ${process.env.token}`,
-//   },headers
-// :
+}

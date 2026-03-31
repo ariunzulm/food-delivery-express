@@ -19,6 +19,7 @@ import { FoodCardHeader } from "./__component/FoodCardHeader";
 type AddFoodCardProps = {
   category: Category;
   categories: Category[];
+  selectedCategory: number;
 };
 type NewFoodProps = {
   foodName: string;
@@ -28,7 +29,11 @@ type NewFoodProps = {
   foodCategoryId: number | null;
 };
 
-const AddFoodCard = ({ category, categories }: AddFoodCardProps) => {
+const AddFoodCard = ({
+  category,
+  categories,
+  selectedCategory,
+}: AddFoodCardProps) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -37,7 +42,7 @@ const AddFoodCard = ({ category, categories }: AddFoodCardProps) => {
     price: "",
     ingredients: "",
     image: "",
-    foodCategoryId: null,
+    foodCategoryId: selectedCategory ?? null,
   });
 
   const onHandleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -47,7 +52,6 @@ const AddFoodCard = ({ category, categories }: AddFoodCardProps) => {
     console.log({ ...newFood, [name]: value });
   };
   const onSelectCategory = (foodCategoryId: number) => {
-    console.log(foodCategoryId, "fddddd vcfdvdfvdfvfd helllooif");
     setNewFood({ ...newFood, foodCategoryId: foodCategoryId });
   };
 
@@ -91,6 +95,7 @@ const AddFoodCard = ({ category, categories }: AddFoodCardProps) => {
         <DialogContent className="sm:max-w-md p-4">
           <FoodCardHeader category={category} />
           <FoodCardInputs
+            selectedCategory={selectedCategory}
             onSelectCategory={onSelectCategory}
             onHandleChange={onHandleChange}
             categories={categories}
@@ -102,7 +107,7 @@ const AddFoodCard = ({ category, categories }: AddFoodCardProps) => {
               onClick={onAddFoodCard}
               disabled={loading}
               type="button"
-              className="bg-red-500 hover:bg-red-400 text-white"
+              className="bg-red-500 hover:bg-red-400 text-white cursor-pointer"
             >
               {loading ? (
                 <LoaderCircle className="animate-spin" />

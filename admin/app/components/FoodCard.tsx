@@ -9,11 +9,17 @@ type FoodCardProps = {
   food: Food;
   category: Category;
   categories: Category[];
+  selectedCategory: number;
 };
 
-const FoodCard = ({ food, category, categories }: FoodCardProps) => {
+const FoodCard = ({
+  food,
+  category,
+  categories,
+  selectedCategory,
+}: FoodCardProps) => {
   const { foodName, price, ingredients, id, image } = food;
-  const posterUrl = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-DzXYr43tUerhBqf_UkJnMAlzKzjEAy_ceg&s`;
+  const posterUrl = image;
 
   return (
     <section className="group relative w-full space-y-2 overflow-hidden border border-zinc-100 p-2 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 bg-white dark:bg-zinc-900">
@@ -60,6 +66,7 @@ const FoodCard = ({ food, category, categories }: FoodCardProps) => {
           </DialogTrigger>
           <DialogContent className="sm:max-w-md p-4">
             <UpdateFoodCard
+              selectedCategory={selectedCategory}
               food={food}
               categories={categories}
               category={category}

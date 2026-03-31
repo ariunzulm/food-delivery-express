@@ -2,7 +2,7 @@ import { prisma } from "../../lib/prisma";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 export const createUser = async (req: Request, res: Response) => {
-  const { email, password, phoneNumber, age, role } = req.body;
+  const { email, password, confirmPassword, phoneNumber, age, role } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
@@ -14,6 +14,7 @@ export const createUser = async (req: Request, res: Response) => {
       data: {
         email,
         password: hashedPassword,
+        confirmPassword,
         phoneNumber,
         age,
         role,

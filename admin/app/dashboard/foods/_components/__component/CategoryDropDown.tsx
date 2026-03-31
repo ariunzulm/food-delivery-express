@@ -12,17 +12,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-
 type CategoryDropDownProps = {
   categories: Category[];
+  selectedCategory?: number;
   onSelectCategory: (foodCategoryId: number) => void;
 };
 export function CategoryDropDown({
   categories,
   onSelectCategory,
+  selectedCategory,
 }: CategoryDropDownProps) {
   return (
-    <Select onValueChange={(value) => onSelectCategory(Number(value))}>
+    <Select
+      defaultValue={selectedCategory ? String(selectedCategory) : undefined}
+      onValueChange={(value) => onSelectCategory(Number(value))}
+    >
       <SelectTrigger className="w-full max-w-48">
         <SelectValue placeholder="Select a dish Category" />
       </SelectTrigger>

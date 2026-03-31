@@ -6,6 +6,7 @@ export const getOrders = async (_req: Request, res: Response) => {
   try {
     const orders = await prisma.foodOrder.findMany({
       include: {
+        user: true,
         foodOrderItems: {
           include: { food: true },
         },

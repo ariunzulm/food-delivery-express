@@ -12,13 +12,15 @@ export type BodyType = {
 };
 
 export const createNewOrder = async (req: Request, res: Response) => {
-  const userId = req.user?.userId;
+  const userId = req.user?.userId!;
   const { orderItems }: BodyType = await req.body;
   try {
     if (userId === undefined) {
-      res.status(400).json({ message: "Invalid user" });
+      console.log(userId, "undeee");
+      res.status(400).json({ message: "Invalid usedfgbgnkvjgr" });
       return;
     }
+
     const totalPrice = await calculateTotalPrice(orderItems);
     if (!totalPrice) throw error("Price not founded");
 
