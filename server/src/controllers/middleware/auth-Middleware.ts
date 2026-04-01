@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { TokenType } from "../../types/types";
 
-const authMiddleware = async (
+export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -32,4 +32,3 @@ const authMiddleware = async (
     res.status(400).json({ message: "Invalid authentification" });
   }
 };
-export default authMiddleware;

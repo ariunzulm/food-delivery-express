@@ -1,5 +1,4 @@
 import { getOrders } from "@/app/lib/servers/get-Orders";
-import { getUsers } from "@/app/lib/servers/get-users";
 import {
   Table,
   TableBody,
@@ -24,18 +23,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Ban,
-  ClockArrowDown,
-  CreditCardIcon,
-  LogOutIcon,
-  PackageCheck,
-  SettingsIcon,
-  UserIcon,
-} from "lucide-react";
+import { Ban, ClockArrowDown, PackageCheck } from "lucide-react";
+import { getUser, getUsers } from "@/app/lib/servers/get-users";
 
 const tableColumns = [
   "№",
@@ -48,9 +39,11 @@ const tableColumns = [
 ];
 
 const OrdersPage = async () => {
-  const { users } = await getUsers();
+  const users = await getUsers();
   const order = await getOrders();
-  console.log(users, "users");
+  console.log("users:", users);
+  console.log("orders: ", order);
+
   return (
     <Table className="">
       <TableHeader>
@@ -68,7 +61,7 @@ const OrdersPage = async () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {users.map((user, index) => {
+        {users?.users.map((user, index) => {
           return (
             <TableRow key={index}>
               <TableCell>{index + 1}</TableCell>
@@ -133,7 +126,7 @@ export const DropdownMenuIcons = () => {
 };
 
 export const Status = async () => {
-  const { users } = await getUsers();
+  const users = await getUsers();
   return (
     <Dialog>
       <form>
@@ -146,7 +139,7 @@ export const Status = async () => {
             <DialogTitle className="uppercase"></DialogTitle>
           </DialogHeader>
           <DialogDescription>
-            {users.map((user) =>
+            {users?.users.map((user) =>
               user.foodOrder.map((order) => (
                 <div
                   key={order.id}

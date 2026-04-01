@@ -22,8 +22,10 @@ export function CategoryDropDown({
   onSelectCategory,
   selectedCategory,
 }: CategoryDropDownProps) {
+  const value = categories.find((category) => category.id === selectedCategory);
   return (
     <Select
+      value={value?.categoryName}
       defaultValue={selectedCategory ? String(selectedCategory) : undefined}
       onValueChange={(value) => onSelectCategory(Number(value))}
     >
@@ -34,6 +36,7 @@ export function CategoryDropDown({
         <SelectGroup>
           <SelectLabel>Dish Categories</SelectLabel>
           {categories.map((category) => {
+            console.log(category);
             return (
               <SelectItem key={category.id} value={String(category.id)}>
                 {category.categoryName}

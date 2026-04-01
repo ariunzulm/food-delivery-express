@@ -4,9 +4,10 @@ import { createNewOrder } from "../controllers/orders/create-orders";
 import { deleteOrderById } from "../controllers/orders/delete-order";
 import { updatedOrderById } from "../controllers/orders/update-order";
 import { getOrderByUser } from "../controllers/orders/get-order-by-id-User";
-import authMiddleware from "../controllers/middleware/auth-Middleware";
+
 import adminMiddleware from "../controllers/middleware/admin-Middleware";
 import { getOrderById } from "../controllers/orders/get-order-by-id";
+import { authMiddleware } from "../controllers/middleware/auth-Middleware";
 
 const router = express.Router();
 

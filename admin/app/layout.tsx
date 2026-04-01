@@ -3,6 +3,7 @@
 import "./globals.css";
 import { ThemeProvider } from "./components/theme-provider";
 import ToastProvider from "./components/ToastProvider";
+import { ModeToggle } from "./components/ModeToggle";
 
 export default function RootLayout({
   children,

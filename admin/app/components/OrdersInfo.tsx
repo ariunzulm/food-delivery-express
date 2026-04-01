@@ -1,5 +1,5 @@
 import { Truck } from "lucide-react";
-import { ModeToggle } from "./ToggleTheme";
+import { ModeToggle } from "./ModeToggle";
 
 const OrdersInfo = () => {
   return (

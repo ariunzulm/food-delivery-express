@@ -1,4 +1,4 @@
-import FoodsCardListing from "./components/FoodsCategorieas";
+import FoodsCardListing from "./components/FoodsCategoriesListing";
 import Hero from "./components/Hero";
 
 const HomePage = () => {

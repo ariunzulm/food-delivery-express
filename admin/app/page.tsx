@@ -1,11 +1,10 @@
-import OrdersInfo from "./components/OrdersInfo";
+import SignIn from "./logIn/signIn/page";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen w-full">
-      <OrdersInfo />
-      main page
-    </div>
+    <main className="min-h-screen w-full p-10">
+      <SignIn />
+    </main>
   );
 };
 export default HomePage;

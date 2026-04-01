@@ -1,10 +1,10 @@
-import { prisma } from "../../lib/prisma";
 import { Request, Response } from "express";
 import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
+import { prisma } from "../../lib/prisma";
 
 export const signIn = async (req: Request, res: Response) => {
-  const { email, password, } = req.body;
+  const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
@@ -36,6 +36,7 @@ export const signIn = async (req: Request, res: Response) => {
             email: userMatched.email,
             password: userMatched.password,
             role: userMatched.role,
+            userId: userMatched.id,
           },
         },
         jwtSecret,

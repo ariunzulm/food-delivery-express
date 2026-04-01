@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
 type Credentials = {
   email: string;
@@ -22,5 +23,6 @@ export async function POST(req: Request) {
   });
   const data = (await response.json()) as SignInResponse;
   cookiesStore.set("token", data.accessToken);
-  return new Response("OK");
+
+  return NextResponse.json({ success: true }, { status: 200 });
 }
