@@ -1,13 +1,9 @@
-import {
-  ChevronRightIcon,
-  LogIn,
-  MapPin,
-  ShoppingCart,
-  User,
-} from "lucide-react";
+"use client";
+import { ChevronRightIcon, LogIn, MapPin, User } from "lucide-react";
 import { NomNomLogo } from "./Footer";
 import { ModeToggle } from "./ToggleTheme";
 import Link from "next/link";
+import { FoodCardSheet } from "./FoodCardSheet";
 
 const Navigation = () => {
   return (
@@ -33,13 +29,13 @@ const Navigation = () => {
           </div>
           <Link href="/userLogIn">
             <div className="w-10 h-10 rounded-full bg-red-500 border border-red-500/30 flex items-center justify-center cursor-pointer">
-              {/* <ShoppingCart className="w-5 h-5 text-red-500" /> */}
               <LogIn className="w-5 h-5 text-zinc-200" />
             </div>
           </Link>
           <div className="w-10 h-10 rounded-full bg-zinc-200 border border-red-500/30 flex items-center justify-center cursor-pointer">
             <User className="w-5 h-5 text-red-500" />
           </div>
+          <FoodCardSheet />
           <ModeToggle />
         </div>
       </nav>

@@ -11,7 +11,7 @@ import { getUser } from "../lib/servers/get-users";
 
 export const UserProfile = async () => {
   const { user } = await getUser();
-
+  console.log(user, ":user");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

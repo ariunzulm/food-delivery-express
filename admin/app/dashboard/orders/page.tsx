@@ -45,7 +45,7 @@ const OrdersPage = async () => {
   console.log("orders: ", order);
 
   return (
-    <Table className="">
+    <Table>
       <TableHeader>
         <TableRow>
           {tableColumns.map((title) => {

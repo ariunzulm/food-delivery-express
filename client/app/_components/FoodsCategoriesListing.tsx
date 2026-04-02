@@ -1,9 +1,11 @@
-import { getCategories } from "../lib/servers/get-Categies";
+import { Category } from "../lib/types/categoriesTypes";
 import FoodCard from "./FoodCard";
 
-const FoodsCardListing = async () => {
-  const categories = await getCategories();
+type FoodsCardListingProps = {
+  categories: Category[];
+};
 
+const FoodsCardListing = ({ categories }: FoodsCardListingProps) => {
   return (
     <div className="my-4">
       {categories.map((category) => {
@@ -20,13 +22,7 @@ const FoodsCardListing = async () => {
               {category.foods.map((food) => {
                 return (
                   <div key={food.id}>
-                    <FoodCard
-                      foodName={food.foodName}
-                      price={food.price}
-                      ingredients={food.ingredients}
-                      categoryName={category.categoryName}
-                      image={food.image}
-                    />
+                    <FoodCard food={food} category={category} />
                   </div>
                 );
               })}
