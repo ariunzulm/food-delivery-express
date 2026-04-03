@@ -25,8 +25,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Ban, ClockArrowDown, PackageCheck } from "lucide-react";
-import { getUser, getUsers } from "@/app/lib/servers/get-users";
+
+import { getUsers } from "@/app/lib/servers/get-users";
+import { FoodOrderItem, Order } from "@/app/lib/types/ordersTypes";
+import { User } from "@/app/lib/types/usersTypes";
 
 const tableColumns = [
   "№",
@@ -40,12 +42,9 @@ const tableColumns = [
 
 const OrdersPage = async () => {
   const users = await getUsers();
-  const order = await getOrders();
-  console.log("users:", users);
-  console.log("orders: ", order);
 
   return (
-    <Table>
+    <Table className="w-full">
       <TableHeader>
         <TableRow>
           {tableColumns.map((title) => {
@@ -89,7 +88,7 @@ const OrdersPage = async () => {
                 })}
               </TableCell>
               <TableCell>
-                <DropdownMenuIcons />
+                <OrderStatusDropDown orders={user.foodOrder} />
               </TableCell>
             </TableRow>
           );
@@ -100,64 +99,40 @@ const OrdersPage = async () => {
 };
 
 export default OrdersPage;
-
-export const DropdownMenuIcons = () => {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <div>{/* <Status /> */}Status </div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem>
-          <ClockArrowDown />
-          PENDING
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <PackageCheck />
-          DELIVERED
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Ban />
-          CANCELED
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
+type OrderStatusDropDownProps = {
+  orders: Order[];
 };
-
-export const Status = async () => {
-  const users = await getUsers();
+export const OrderStatusDropDown = ({ orders }: OrderStatusDropDownProps) => {
+  const status = ["PENDING", "DELIVERED", "CANCELED"];
   return (
     <Dialog>
-      <form>
-        <DialogTrigger>
-          {<Button variant="outline">PENDING</Button>}
-        </DialogTrigger>
-
-        <DialogContent className="sm:max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="uppercase"></DialogTitle>
-          </DialogHeader>
-          <DialogDescription>
-            {users?.users.map((user) =>
-              user.foodOrder.map((order) => (
-                <div
-                  key={order.id}
-                  className="border border-red-50 w-fit flex justify-between"
-                >
-                  {order.status}
-                </div>
-              )),
-            )}
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          {orders.map((order) => (
+            <div
+              key={order.id}
+              className="border border-gray-200 rounded p-2 flex justify-between text-sm"
+            >
+              {order.status}
+            </div>
+          ))}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-fit p-2">
+          <DialogDescription className="space-y-2">
+            {status.map((st, i) => (
+              <div key={i} className="p-1 text-sm">
+                {st}
+              </div>
+            ))}
           </DialogDescription>
-          <DialogFooter>
+          <DialogFooter className="text-sm">
             <DialogClose>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit">Save</Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </Dialog>
   );
 };

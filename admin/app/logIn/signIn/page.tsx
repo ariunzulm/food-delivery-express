@@ -58,11 +58,10 @@ const SignIn = () => {
             type="password"
             placeholder="Enter your password"
           />
-          <Link href="/dashboard/foods">
-            <Button className="cursor-pointer" onClick={onSubmit}>
-              Sign In
-            </Button>
-          </Link>
+
+          <Button className="cursor-pointer" onClick={onSubmit}>
+            Sign In
+          </Button>
         </Field>
         <div className="flex gap-2 justify-between">
           <p className="text-muted-foreground text-sm">Don't have an account</p>

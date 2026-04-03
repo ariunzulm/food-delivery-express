@@ -22,7 +22,7 @@ export function AppSidebar() {
             <Link href={`/dashboard/foods`}>
               <TabsTrigger
                 value="menu"
-                className={`${pathName === "/dashboard/dfoos"}`}
+                className={`${pathName === "/dashboard/foods"}`}
               >
                 <PanelsTopLeft />
                 Food menu
@@ -38,9 +38,7 @@ export function AppSidebar() {
             </Link>
           </TabsList>
 
-          <TabsContent value="menu">
-           Food Menu
-          </TabsContent>
+          <TabsContent value="menu">Food Menu</TabsContent>
           <TabsContent value="orders">Food Orders</TabsContent>
         </Tabs>
       </SidebarContent>

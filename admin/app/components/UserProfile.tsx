@@ -22,7 +22,7 @@ export const UserProfile = async () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-32">
         <DropdownMenuGroup>
-          <DropdownMenuItem>{user.email}</DropdownMenuItem>
+          {/* <DropdownMenuItem>{user.email}</DropdownMenuItem> */}
           <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem>Billing</DropdownMenuItem>
 
