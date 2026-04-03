@@ -22,7 +22,7 @@ export function CardToggle() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="card">
-        <Card>
+        <Card> 
           {data.foodCard.map((item) => (
             <CardContent className="text-sm text-muted-foreground">
               <CheckOutFoodCard food={item.food} />

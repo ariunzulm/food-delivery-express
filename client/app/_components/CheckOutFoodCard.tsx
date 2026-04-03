@@ -44,12 +44,6 @@ const CheckOutFoodCard = ({ food }: CheckOutFoodCardProps) => {
             >
               Unit price $ {price.toString()}
             </Badge>
-            <Badge
-              variant="secondary"
-              className="px-2 py-1 w-fit text-md font-medium text-foreground"
-            >
-              Total Price $
-            </Badge>
           </div>
         </div>
         <div className="flex justify-between gap-3 w-20 items-center">

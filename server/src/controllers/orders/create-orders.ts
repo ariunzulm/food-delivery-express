@@ -10,7 +10,18 @@ export type BodyType = {
   userId: number;
   orderItems: OrderItems[];
 };
-
+export type Foods = {
+  foods: {
+    id: number;
+    foodName: string;
+    price: string;
+    image: string | null;
+    ingredients: string | null;
+    foodCategoryId: number;
+    createdAt: Date;
+    updatedAt: Date | null;
+  };
+};
 export const createNewOrder = async (req: Request, res: Response) => {
   const userId = req.user?.userId!;
   const { orderItems }: BodyType = await req.body;
