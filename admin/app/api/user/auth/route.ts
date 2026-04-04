@@ -14,13 +14,16 @@ export async function POST(req: Request) {
 
   const cookiesStore = await cookies();
 
-  const response = await fetch("http://localhost:8787/users/signIn", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  const response = await fetch(
+    "https://food-delivery-server-wdw6.onrender.com/users/signIn",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
     },
-    body: JSON.stringify(credentials),
-  });
+  );
   const data = (await response.json()) as SignInResponse;
   cookiesStore.set("token", data.accessToken);
 

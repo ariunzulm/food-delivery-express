@@ -60,7 +60,7 @@ const SignIn = () => {
             type="password"
             placeholder="Enter your password"
           />
-          <Link href="/dashboard/foods">
+          <Link href="/">
             <Button className="cursor-pointer" onClick={onSubmit}>
               Sign In
             </Button>

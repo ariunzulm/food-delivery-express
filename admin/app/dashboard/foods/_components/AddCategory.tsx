@@ -15,10 +15,8 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Category } from "@/app/lib/types/categoriesTypes";
-type AddCategoryProps = {
-  categories: Category[];
-};
-const AddCategory = ({ categories }: AddCategoryProps) => {
+
+const AddCategory = () => {
   const [newCategory, setNewCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -37,7 +35,7 @@ const AddCategory = ({ categories }: AddCategoryProps) => {
     console.log(postBody, "body");
 
     try {
-      await fetch("http://localhost:8787/categories", {
+      await fetch("https://food-delivery-server-wdw6.onrender.com/categories", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

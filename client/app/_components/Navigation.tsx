@@ -32,9 +32,11 @@ const Navigation = () => {
               <LogIn className="w-5 h-5 text-zinc-200" />
             </div>
           </Link>
-          <div className="w-10 h-10 rounded-full bg-zinc-200 border border-red-500/30 flex items-center justify-center cursor-pointer">
-            <User className="w-5 h-5 text-red-500" />
-          </div>
+          <Link href="/userLogIn">
+            <div className="w-10 h-10 rounded-full bg-zinc-200 border border-red-500/30 flex items-center justify-center cursor-pointer">
+              <User className="w-5 h-5 text-red-500" />
+            </div>
+          </Link>
           <FoodCardSheet />
           <ModeToggle />
         </div>

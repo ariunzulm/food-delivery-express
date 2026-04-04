@@ -65,7 +65,9 @@ const SignIn = () => {
         </Field>
         <div className="flex gap-2 justify-between">
           <p className="text-muted-foreground text-sm">Don't have an account</p>
-          <p className="text-red-700 text-sm">Sign up</p>
+          <Link href="/logIn/signUp">
+            <p className="text-red-700 text-sm">Sign up</p>
+          </Link>
         </div>
       </div>
       <LoginImage />

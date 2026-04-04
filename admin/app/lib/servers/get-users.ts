@@ -9,13 +9,16 @@ export const getUser = async () => {
   const cookiesStore = await cookies();
   const token = cookiesStore.get("token")?.value;
 
-  const response = await fetch("http://localhost:8787/users/auth/me", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+  const response = await fetch(
+    "https://food-delivery-server-wdw6.onrender.com/users/auth/me",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const user = (await response.json()) as GetUserResponse;
 
   return user;
@@ -27,7 +30,9 @@ type UsersProps = {
 
 export const getUsers = async () => {
   try {
-    const response = await fetch("http://localhost:8787/users");
+    const response = await fetch(
+      "https://food-delivery-server-wdw6.onrender.com/users",
+    );
 
     const users = (await response.json()) as UsersProps;
 

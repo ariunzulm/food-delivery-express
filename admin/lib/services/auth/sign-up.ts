@@ -10,13 +10,16 @@ type SignInResponse = {
 };
 export const signUp = async (credentials: Credentials) => {
   try {
-    const response = await fetch("http://localhost:8787/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "https://food-delivery-server-wdw6.onrender.com/users",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credentials),
       },
-      body: JSON.stringify(credentials),
-    });
+    );
     const data = (await response.json()) as SignInResponse;
     return data;
   } catch (error) {

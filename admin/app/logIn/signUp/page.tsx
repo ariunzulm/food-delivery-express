@@ -7,7 +7,8 @@ import { signUp } from "@/lib/services/auth/sign-up";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { ChangeEventHandler, useState } from "react";
-import { LoginImage } from "../page";
+import { LoginImage } from "../signIn/page";
+
 
 type CredentialsProps = {
   email: string;

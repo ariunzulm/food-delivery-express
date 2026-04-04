@@ -7,12 +7,12 @@ type AddedCategoryPageProps = {
 };
 const AddedCategoryPage = ({ categories }: AddedCategoryPageProps) => {
   return (
-    <div className="p-4 bg-zinc-800 text-red-500 w-full rounded-lg outline-1 space-y-2">
+    <div className="p-4  text-red-500 w-full rounded-lg outline-1 space-y-2">
       <h2>Dishes Categories</h2>
       <div className="flex flex-wrap gap-2">
         <Button>
           All dishes
-          <p className="bg-zinc-700 w-fit px-2 py-1 text-[10px] rounded-lg text-white cursor-pointer">
+          <p className="w-fit px-2 py-1 text-[10px] rounded-lg text-white bg-zinc-800 cursor-pointer">
             {categories.flatMap((category) => category.foods).length}
           </p>
         </Button>
@@ -23,7 +23,7 @@ const AddedCategoryPage = ({ categories }: AddedCategoryPageProps) => {
                 {category.categoryName}
                 <p
                   key={category.id}
-                  className="bg-zinc-700 w-fit px-2 py-1 text-[10px] rounded-lg text-white cursor-pointer"
+                  className="w-fit px-2 py-1 text-[10px] rounded-lg text-white bg-zinc-800 cursor-pointer"
                 >
                   {category.foods.length}
                 </p>
@@ -31,7 +31,7 @@ const AddedCategoryPage = ({ categories }: AddedCategoryPageProps) => {
             </div>
           );
         })}
-        <AddCategory categories={categories} />
+        <AddCategory />
       </div>
     </div>
   );

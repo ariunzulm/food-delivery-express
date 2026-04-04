@@ -59,7 +59,7 @@ const AddFoodCard = ({
     setLoading(true);
 
     try {
-      await fetch("http://localhost:8787/foods", {
+      await fetch("https://food-delivery-server-wdw6.onrender.com/foods", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
