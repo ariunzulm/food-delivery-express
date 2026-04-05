@@ -18,11 +18,17 @@ import {
 } from "@/components/ui/card";
 
 export function FoodCardSheet() {
+  const cartCount = 2;
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div className="w-10 h-10 rounded-full bg-zinc-200 border border-red-500/30 flex items-center justify-center cursor-pointer">
-          <ShoppingCart className="w-5 h-5 text-red-500" />
+        <div className="relative">
+          <FoodCardSheet />
+          {cartCount > 0 && (
+            <span className="pointer-events-none absolute top-0.5 right-0.5 min-w-4 h-4 px-0.5 rounded-full bg-red-500 text-white text-[10px] font-semibold flex items-center justify-center border-2 border-white dark:border-zinc-900">
+              {cartCount > 9 ? "9+" : cartCount}
+            </span>
+          )}
         </div>
       </SheetTrigger>
 

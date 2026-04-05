@@ -16,3 +16,6 @@ export type Category = {
   updatedAt: string;
   foods: Food[];
 };
+export type Emoji = {
+  emoji: string;
+};

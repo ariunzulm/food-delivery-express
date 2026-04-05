@@ -7,7 +7,7 @@ const Hero = () => {
         <div className="absolute top-1/4 left-0 w-7/8 h-55 bg-[#181818] rounded-r-full z-2" />
         <div className="absolute top-2/7 left-0 w-8/9 h-55 bg-[#FD543F] rounded-r-full z-1" />
 
-        <div className="absolute top-1/2 flex items-center w-full h-full z-100">
+        <div className="absolute top-1/2 flex items-center w-full h-full z-20">
           <div className="flex flex-col justify-center gap-4 pl-8 sm:pl-14 pt-10 pb-10 flex-1 min-w-0">
             <h2 className="text-white text-8xl font-extrabold leading-3 tracking-tighter uppercase absolute z-10 -top-3 left-7 w-75 h-18 -translate-y-[20%]">
               TODAY'S

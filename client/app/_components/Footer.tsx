@@ -1,4 +1,4 @@
-import { Mail, MapPin, PhoneCall, Truck } from "lucide-react";
+import { Mail, MapPin, PhoneCall } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -17,7 +17,10 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 pt-14 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16 pb-12 border-b border-zinc-800">
           <div className="flex flex-col gap-5">
-            <NomNomLogo />
+            <span className="font-display text-2xl font-bold tracking-tight capitalize select-none">
+              <span className="text-red-500">nom</span>
+              <span className="text-zinc-900 dark:text-zinc-100">nom</span>
+            </span>
             <p className="text-sm text-zinc-400 leading-relaxed max-w-xs">
               From our kitchen to your door — fast, warm, and made with care.
             </p>
@@ -113,18 +116,3 @@ export default function Footer() {
     </footer>
   );
 }
-export const NomNomLogo = () => {
-  return (
-    <div className="flex items-center gap-3">
-      <div className="w-10 h-10 rounded-full bg-teal-500/10 border border-orange-500/30 flex items-center justify-center">
-        <Truck className="w-5 h-5 text-red-400" />
-      </div>
-      <span className="text-2xl font-bold tracking-tight text-white">
-        Nom
-        <span className="text-2xl font-bold tracking-tight text-red-500">
-          Nom
-        </span>
-      </span>
-    </div>
-  );
-};
