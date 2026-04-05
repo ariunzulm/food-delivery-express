@@ -1,70 +1,67 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import { Food } from "../lib/types/categoriesTypes";
-import { useState } from "react";
 
 type SelectedFoodCardProps = {
   food: Food;
   quantity: number;
   increaseFoodQuantity: () => void;
   decreaseFoodQuantity: () => void;
+
 };
 
 export const FoodCardAddButtons = ({
   food,
   quantity,
+
   increaseFoodQuantity,
   decreaseFoodQuantity,
 }: SelectedFoodCardProps) => {
   const { image, foodName, price } = food;
-
+  const unitPrice = Number(price);
+  const totalPrice = (unitPrice * quantity).toFixed(2);
   return (
-    <section className="flex w-full overflow-hidden p-2 border border-zinc-100  dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 bg-white dark:bg-zinc-900">
-      <div className="w-2/4 aspect-6/2 overflow-hidden rounded-2xl">
+    <section className="flex gap-4 w-full overflow-hidden rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3">
+      <div className="w-28 h-28 shrink-0 rounded-xl overflow-hidden">
         <img
           src={image}
-          alt={`${foodName} poster`}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          alt={foodName}
+          className="w-full h-full object-cover"
         />
       </div>
 
-      <div className="p-4 flex flex-col gap-3">
-        <h3 className="text-base font-bold leading-tight text-red-500 ">
+      <div className="flex flex-col justify-between flex-1 min-w-0 py-1">
+        <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-snug line-clamp-2">
           {foodName}
         </h3>
 
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex flex-col gap-1">
-            <Badge
-              variant="secondary"
-              className="px-2 py-2 w-fit text-md font-semibold dark:text-zinc-100  text-muted-foreground"
-            >
-              Unit price $ {price.toString()}
-            </Badge>
-            <Badge
-              variant="secondary"
-              className="px-2 py-1 w-fit text-md font-medium text-foreground"
-            >
-              Total Price $
-            </Badge>
-          </div>
+        <div className="flex items-center gap-3 text-sm">
+          <span className="text-zinc-400 dark:text-zinc-500">
+            ${unitPrice.toFixed(2)} each
+          </span>
+          <span className="text-zinc-300 dark:text-zinc-600">·</span>
+          <span className="font-semibold text-red-500">${totalPrice}</span>
         </div>
-        <div className="flex justify-between gap-3 w-20 items-center">
-          <Button
-            onClick={increaseFoodQuantity}
-            className="rounded-full cursor-pointer hover:bg-red-200"
-          >
-            <Plus />
-          </Button>
-          {quantity}
-          <Button
+        <div className="flex items-center gap-2">
+          <button
             onClick={decreaseFoodQuantity}
-            className="rounded-full cursor-pointer hover:bg-red-200"
+            disabled={quantity <= 1}
+            className="w-8 h-8 rounded-full cursor-pointer border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:border-red-400 hover:text-red-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
-            <Minus />
-          </Button>
+            <Minus size={14} />
+          </button>
+
+          <span className="w-6 text-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+            {quantity}
+          </span>
+
+          <button
+            onClick={increaseFoodQuantity}
+            className="w-8 h-8 rounded-full cursor-pointer border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:border-red-500 hover:bg-red-500 hover:text-white transition-all"
+          >
+            <Plus size={14} />
+          </button>
         </div>
+       
       </div>
     </section>
   );

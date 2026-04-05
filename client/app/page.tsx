@@ -1,7 +1,7 @@
-import { FoodCardSheet } from "./_components/FoodCardSheet";
 import FoodsCardListing from "./_components/FoodsCategoriesListing";
 import Hero from "./_components/Hero";
 import { NavCategories } from "./_components/NavCategories";
+
 import { getCategories } from "./lib/servers/get-Categies";
 
 const HomePage = async () => {
@@ -14,12 +14,8 @@ const HomePage = async () => {
 
   return (
     <div className="min-h-screen w-full">
-      <NavCategories />
-      <Hero />
-      <main className="max-w-460 mx-auto sm:p-6 lg:p-8 bg-zinc-50 dark:bg-zinc-800">
-        <FoodsCardListing categories={filteredCategories} />
-      </main>
-      <FoodCardSheet />
+      <Hero /> <NavCategories />
+      <FoodsCardListing categories={filteredCategories} />
     </div>
   );
 };

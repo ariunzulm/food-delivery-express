@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 
 type Categories = {
@@ -24,7 +23,6 @@ const categories: Categories[] = [
 
 export const NavCategories = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-
   return (
     <div className="border-t border-zinc-100 dark:border-zinc-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -33,9 +31,12 @@ export const NavCategories = () => {
             <button
               key={cat.slug}
               onClick={() => setActiveCategory(cat.slug)}
-              className={`
-                  flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-medium whitespace-nowrap border transition-all duration-150
-                  ${activeCategory === cat.slug ? "bg-red-50 dark:bg-red-950/40 text-red-500 border-red-200 dark:border-red-800" : "text-zinc-500 dark:text-zinc-400 border-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+              className={`flex items-center gap-1.5 cursor-pointer px-4 py-2 rounded-full text-[13px] font-medium whitespace-nowrap border transition-all duration-150
+                ${
+                  activeCategory === cat.slug
+                    ? "bg-red-50 dark:bg-red-950/40 text-red-500 border-red-200 dark:border-red-800"
+                    : "text-zinc-500 dark:text-zinc-400 border-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300"
+                }`}
             >
               <span className="text-base leading-none">{cat.emoji}</span>
               {cat.label}

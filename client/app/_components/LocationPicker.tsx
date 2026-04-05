@@ -8,6 +8,7 @@ export const LocationPicker = () => {
   const [draft, setDraft] = useState("");
 
   const displayLabel = address || "Add delivery address";
+
   const onHandleConfirm = () => {
     if (draft.trim()) setAddress(draft.trim());
     setOpen(false);
@@ -17,7 +18,7 @@ export const LocationPicker = () => {
     <div>
       <button
         onClick={() => setOpen(true)}
-        className="flex items-center gap-2 h-10 px-4 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-red-400 dark:hover:border-red-500 transition-colors duration-150 max-w-55 group"
+        className="flex items-center cursor-pointer gap-2 h-10 px-4 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-red-400 dark:hover:border-red-500 transition-colors duration-150 max-w-55 group"
       >
         <MapPin className="w-4 h-4 text-red-500" />
         <div className="flex flex-col items-start min-w-0">
@@ -40,7 +41,7 @@ export const LocationPicker = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              <h2 className="text-base font-semibold cursor-pointer text-zinc-900 dark:text-zinc-100">
                 Delivery address
               </h2>
               <button

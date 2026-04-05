@@ -13,13 +13,13 @@ import { Food } from "../lib/types/categoriesTypes";
 import { FoodCardAddButtons } from "./CardAddButtons";
 import { useContext, useState } from "react";
 import { FoodCardContext } from "../_contexts/FoodCardContext";
-import { LoaderCircle, Minus, Plus } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 type SelectedFoodCardProps = { food: Food };
 
 const SelectedFoodCard = ({ food }: SelectedFoodCardProps) => {
-  const { addFoodCard } = useContext(FoodCardContext);
+  const { addFoodCard} = useContext(FoodCardContext);
   const [quantity, setquantity] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -43,32 +43,33 @@ const SelectedFoodCard = ({ food }: SelectedFoodCardProps) => {
 
   return (
     <div>
-      <DialogTitle>Dish info</DialogTitle>
-      <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Dish info</DialogTitle>
         <DialogDescription>Add your favourite dish</DialogDescription>
+      </DialogHeader>
 
-        <FoodCardAddButtons
-          food={food}
-          quantity={quantity}
-          increaseFoodQuantity={increaseFoodQuantity}
-          decreaseFoodQuantity={decreaseFoodQuantity}
-        />
+      <FoodCardAddButtons
+        food={food}
+        quantity={quantity}
+        increaseFoodQuantity={increaseFoodQuantity}
+        decreaseFoodQuantity={decreaseFoodQuantity}
+ 
+      />
 
-        <DialogFooter className="sm:justify-end">
-          <Button
-            disabled={loading}
-            onClick={onAddToCart}
-            type="button"
-            className="bg-red-500 hover:bg-red-400 text-white cursor-pointer"
-          >
-            {loading ? (
-              <LoaderCircle className="animate-spin" />
-            ) : (
-              "Add to cart"
-            )}
-          </Button>
-        </DialogFooter>
-      </DialogContent>
+      <DialogFooter className="sm:justify-end">
+        <Button
+          disabled={loading}
+          onClick={onAddToCart}
+          type="button"
+          className="bg-red-500 hover:bg-red-400 text-white cursor-pointer w-full"
+        >
+          {loading ? (
+            <LoaderCircle className="animate-spin" />
+          ) : (
+            `Add ${quantity} to cart · $${(Number(food.price) * quantity).toFixed(2)}`
+          )}
+        </Button>
+      </DialogFooter>
     </div>
   );
 };

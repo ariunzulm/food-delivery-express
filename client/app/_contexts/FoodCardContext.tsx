@@ -37,8 +37,6 @@ export const FoodCardContextProvider = ({
 
       return [...prev, { food, quantity }];
     });
-    // const newFoodCard = [...foodCard, { food, quantity }];
-    // setFoodCard(newFoodCard);
   };
 
   const removeFromFoodCard = (foodId: number) => {
@@ -51,7 +49,6 @@ export const FoodCardContextProvider = ({
 
   const value: FoodCardContextProps = {
     foodCard,
-    
     addFoodCard,
     removeFromFoodCard,
     clearFoodCard,

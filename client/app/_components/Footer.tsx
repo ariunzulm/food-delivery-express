@@ -1,9 +1,10 @@
 import { Mail, MapPin, PhoneCall } from "lucide-react";
 import Link from "next/link";
+import { NomNomLogo } from "./NomNomLogo";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-zinc-950 overflow-hidden pt-15">
+    <footer className="relativeoverflow-hidden pt-15">
       <div className="bg-red-500 h-23 w-full flex items-center justify-between overflow-hidden">
         {Array.from({ length: 6 }).map((_, i) => (
           <div
@@ -17,10 +18,7 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 pt-14 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16 pb-12 border-b border-zinc-800">
           <div className="flex flex-col gap-5">
-            <span className="font-display text-2xl font-bold tracking-tight capitalize select-none">
-              <span className="text-red-500">nom</span>
-              <span className="text-zinc-900 dark:text-zinc-100">nom</span>
-            </span>
+            <NomNomLogo />
             <p className="text-sm text-zinc-400 leading-relaxed max-w-xs">
               From our kitchen to your door — fast, warm, and made with care.
             </p>
@@ -43,7 +41,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-zinc-500 text-xs mb-0.5">Email us</p>
-                  <p className="text-zinc-200 group-hover:text-red-400 transition-colors">
+                  <p className="text-muted-foreground group-hover:text-red-400 transition-colors">
                     nomnom@delivery.com
                   </p>
                 </div>
@@ -55,7 +53,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-zinc-500 text-xs mb-0.5">Call us</p>
-                  <p className="text-zinc-200">(976) 9989-7788</p>
+                  <p className="text-muted-foreground">(976) 9989-7788</p>
                 </div>
               </div>
 
@@ -65,7 +63,9 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-zinc-500 text-xs mb-0.5">Delivery zone</p>
-                  <p className="text-zinc-200">Ulaanbaatar & surroundings</p>
+                  <p className="text-muted-foreground">
+                    Ulaanbaatar & surroundings
+                  </p>
                 </div>
               </div>
             </div>

@@ -1,52 +1,60 @@
 "use client";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useContext } from "react";
 import { FoodCardContext } from "../_contexts/FoodCardContext";
-import SelectedFoodCard from "./SelectedFoodCard";
-import { FoodCardAddButtons } from "./CardAddButtons";
 import CheckOutFoodCard from "./CheckOutFoodCard";
 import { Input } from "@/components/ui/input";
+import { MapPin } from "lucide-react";
+import CheckOutOrderCard from "./CheckOutOrderCard";
 
 export function CardToggle() {
   const data = useContext(FoodCardContext);
-  console.log(data, "feroihuvg");
-  return (
-    <Tabs defaultValue="card" className="w-full p-4">
-      <TabsList className="w-fill justify-between flex">
-        <TabsTrigger value="card" className="px-18 py-2">
-          Card
-        </TabsTrigger>
-        <TabsTrigger value="order" className="px-17 py-2">
-          Order
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="card">
-        <Card> 
-          {data.foodCard.map((item) => (
-            <CardContent className="text-sm text-muted-foreground">
-              <CheckOutFoodCard food={item.food} />
-            </CardContent>
-          ))}
 
-          <CardTitle className="mx-4">Delivery location</CardTitle>
-          <CardContent className="text-sm text-muted-foreground gap-2 flex flex-col">
-            <Input
-              type="text"
-              className="w-full h-20"
-              placeholder="Please share your complete address"
-            />
-          </CardContent>
-        </Card>
+  const subTotal = data.foodCard.reduce(
+    (sum, food) => sum + Number(food.food.price) * food.quantity,
+    0,
+  );
+  return (
+    <Tabs defaultValue="card" className="w-full">
+      <TabsList className="w-full grid grid-cols-2 mb-4">
+        <TabsTrigger value="cart">Cart</TabsTrigger>
+        <TabsTrigger value="order">Order</TabsTrigger>
+      </TabsList>
+      <TabsContent value="cart" className="flex flex-col gap-3">
+        {data.foodCard.length === 0 ? (
+          <p className="text-sm text-zinc-400 text-center py-8">No items yet</p>
+        ) : (
+          data.foodCard.map((item) => (
+            <CheckOutFoodCard key={item.food.id} food={item.food} />
+          ))
+        )}
+
+        <div className="mt-2 flex flex-col gap-2">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">
+            <MapPin size={12} className="text-red-400" />
+            Delivery location
+          </div>
+          <Input
+            type="text"
+            className="w-full h-20"
+            placeholder="Enter your complete address"
+          />
+        </div>
       </TabsContent>
-      <TabsContent value="order">
-        <Card>
-          {data.foodCard.map((item) => (
-            <CardContent className="text-sm text-muted-foreground">
-              {item.quantity}
-            </CardContent>
-          ))}
-        </Card>
+      <TabsContent value="order" className="flex flex-col gap-2">
+        <h1 className="text-sm text-zinc-400">Order history</h1>
+        {data.foodCard.length === 0 ? (
+          <p className="text-sm text-zinc-400 text-center py-8">No items yet</p>
+        ) : (
+          data.foodCard.map((item) => (
+            <CheckOutOrderCard
+              key={item.food.id}
+              food={item.food}
+              quantity={item.quantity}
+            />
+          ))
+        )}
       </TabsContent>
     </Tabs>
   );
