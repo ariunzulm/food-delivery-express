@@ -1,7 +1,5 @@
 import { Category, Food } from "../lib/types/categoriesTypes";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Edit, SquarePlus } from "lucide-react";
+import { Edit } from "lucide-react";
 import UpdateFoodCard from "../dashboard/foods/_components/UpdateFoodCard";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
@@ -18,63 +16,53 @@ const FoodCard = ({
   categories,
   selectedCategory,
 }: FoodCardProps) => {
-  const { foodName, price, ingredients, id, image } = food;
-  const posterUrl = image;
+  const { foodName, price, ingredients, image } = food;
 
   return (
-    <section className="group relative w-full space-y-2 overflow-hidden border border-zinc-100 p-2 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 bg-white dark:bg-zinc-900">
-      <div className="w-full aspect-4/3 overflow-hidden rounded-2xl">
-        <img
-          src={posterUrl}
-          alt={`${foodName} poster`}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-
-      <div className="px-4 flex flex-col gap-3">
-        <h3 className="text-base font-bold leading-tight text-red-500 ">
-          {foodName}
-        </h3>
-        <div className="flex gap-1">
-          <Badge
-            variant="secondary"
-            className="px-2 py-2 w-fit text-sm font-semibold text-zinc-900 dark:text-zinc-100"
-          >
-            ₮ {price}
-          </Badge>
-          <Badge
-            variant="secondary"
-            className="px-2 py-1 w-fit text-xs font-medium text-muted-foreground"
-          >
+    <Dialog>
+      <section className="group relative w-full overflow-hidden border border-zinc-100 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-red-500/10 hover:-translate-y-0.5 bg-white dark:bg-zinc-900 cursor-pointer">
+        <div className="relative w-full aspect-square overflow-hidden">
+          <img
+            src={image}
+            alt={foodName}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <span className="absolute top-2 left-2 bg-white/90 dark:bg-zinc-900/90 text-zinc-600 dark:text-zinc-300 text-[11px] font-medium px-3 py-1 rounded-full backdrop-blur-sm">
             {category.categoryName}
-          </Badge>
+          </span>
         </div>
-      </div>
-      <div className="px-4 flex justify-between">
-        <p className="px-2 py-2 w-fit text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-          {ingredients}
-        </p>
-        <Dialog>
-          <DialogTrigger>
-            <Button
-              size="icon"
-              className=" bg-red-500 cursor-pointer rounded-full hover:bg-red-400 text-white transition-colors"
-              aria-label={`Add ${foodName} to cart`}
-            >
-              <Edit className="w-5 h-5" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-md p-4">
-            <UpdateFoodCard
-              selectedCategory={selectedCategory}
-              food={food}
-              categories={categories}
-              category={category}
-            />
-          </DialogContent>
-        </Dialog>
-      </div>
-    </section>
+
+        <div className="p-3 flex flex-col gap-2">
+          <h3 className="text-sm font-semibold leading-snug text-zinc-900 dark:text-zinc-100 line-clamp-1">
+            {foodName}
+          </h3>
+
+          <p className="text-xs text-zinc-400 dark:text-zinc-500 line-clamp-2 leading-relaxed">
+            {ingredients}
+          </p>
+
+          <div className="flex items-center justify-between mt-1">
+            <span className="text-base font-bold text-red-500">${price}</span>
+
+            <DialogTrigger>
+              <button className="flex items-center cursor-pointer gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150">
+                <Edit size={13} strokeWidth={2.5} />
+                Update
+              </button>
+            </DialogTrigger>
+          </div>
+        </div>
+
+        <DialogContent className="sm:max-w-md p-4">
+          <UpdateFoodCard
+            selectedCategory={selectedCategory}
+            food={food}
+            categories={categories}
+            category={category}
+          />
+        </DialogContent>
+      </section>
+    </Dialog>
   );
 };
 export default FoodCard;

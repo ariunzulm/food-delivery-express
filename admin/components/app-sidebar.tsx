@@ -3,11 +3,11 @@
 import { usePathname } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { PanelsTopLeft } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
 
 import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
-import { NomNomLogo } from "@/app/components/OrdersInfo";
+import { NomNomLogo } from "@/app/components/NomNomLogo";
 
 export function AppSidebar() {
   const pathName = usePathname();
@@ -24,7 +24,6 @@ export function AppSidebar() {
                 value="menu"
                 className={`${pathName === "/dashboard/foods"}`}
               >
-                <PanelsTopLeft />
                 Food menu
               </TabsTrigger>
             </Link>

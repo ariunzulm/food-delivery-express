@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 import SelectedFoodCard from "./SelectedFoodCard";
@@ -38,13 +37,10 @@ const FoodCard = ({ food, category }: FoodCardProps) => {
             <span className="text-base font-bold text-red-500">${price}</span>
 
             <DialogTrigger asChild>
-              <button
-                className="flex items-center gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150"
-                aria-label={`Add ${foodName} to cart`}
-              >
+              <div className="flex items-center gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150">
                 <Plus size={13} strokeWidth={2.5} />
                 Add
-              </button>
+              </div>
             </DialogTrigger>
           </div>
         </div>

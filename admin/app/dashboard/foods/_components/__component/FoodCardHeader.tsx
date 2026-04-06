@@ -1,14 +1,15 @@
 import { Category } from "@/app/lib/types/categoriesTypes";
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { DialogHeader } from "@/components/ui/dialog";
 type FoodCardHeaderProps = {
   category: Category;
+  title: string;
 };
-export const FoodCardHeader = ({ category }: FoodCardHeaderProps) => {
+export const FoodCardHeader = ({ category, title }: FoodCardHeaderProps) => {
   return (
     <DialogHeader>
-      <DialogTitle className="text-base text-center font-bold leading-tight text-red-500">
-        Add new Dish to {category.categoryName}
-      </DialogTitle>
+      <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-1">
+        {title} {category.categoryName}
+      </p>
     </DialogHeader>
   );
 };

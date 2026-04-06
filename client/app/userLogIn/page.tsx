@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import Link from "next/link";
 import { ChangeEventHandler, useState } from "react";
@@ -28,7 +27,7 @@ const SignIn = () => {
       password: userInfo.password,
     };
     await signIn(credentials);
-    router.push("/dashboard/foods");
+    router.push("/");
   };
 
   return (

@@ -52,7 +52,7 @@ const AddCategory = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <div className="rounded-full p-2 w-fit bg-red-500 hover:bg-red-400 text-white transition-colors cursor-pointer">
+        <div className="flex items-center cursor-pointer gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-2 py-1.5 rounded-full transition-all duration-150">
           <Plus />
         </div>
       </DialogTrigger>
@@ -82,7 +82,7 @@ const AddCategory = () => {
             onClick={onAddCategory}
             disabled={loading}
             type="button"
-            className="bg-red-500 hover:bg-red-400 text-white cursor-pointer"
+            className="flex items-center cursor-pointer gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150"
           >
             {loading ? (
               <LoaderCircle className="animate-spin" />

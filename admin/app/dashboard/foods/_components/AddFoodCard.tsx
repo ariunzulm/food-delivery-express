@@ -1,8 +1,7 @@
 "use client";
 
-import { LoaderCircle, Plus, X } from "lucide-react";
+import { LoaderCircle, Plus } from "lucide-react";
 import { ChangeEventHandler, useState } from "react";
-import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,6 +14,7 @@ import { Category } from "@/app/lib/types/categoriesTypes";
 import { useRouter } from "next/navigation";
 import { FoodCardInputs } from "./__component/FoodCardInputs";
 import { FoodCardHeader } from "./__component/FoodCardHeader";
+import CldUpload from "@/app/components/CldUpload";
 
 type AddFoodCardProps = {
   category: Category;
@@ -81,19 +81,21 @@ const AddFoodCard = ({
   };
 
   return (
-    <section className="group relative w-full flex items-center justify-center flex-col gap-3 overflow-hidden border border-zinc-100 p-2 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-red-500/10 hover:-translate-y-1 bg-white dark:bg-zinc-900">
-      <h3 className="text-base text-center font-bold leading-tight text-red-500">
-        Add new Dish to {category.categoryName}
-      </h3>
-      <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={setOpen}>
+      <section className="w-full p-4 gap-2 flex flex-col items-center border border-zinc-100 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-red-500/10 hover:-translate-y-0.5 bg-white dark:bg-zinc-900 cursor-pointer">
+        <p className="text-xs font-semibold uppercase tracking-widest text-red-400 mb-1">
+          Add new dish to {category.categoryName}
+        </p>
+
         <DialogTrigger>
-          <div className="rounded-full p-2 w-fit bg-red-500 hover:bg-red-400 text-white transition-colors cursor-pointer">
-            <Plus />
+          <div className="flex items-center cursor-pointer gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150">
+            <Plus size={13} strokeWidth={2.5} />
+            Add
           </div>
         </DialogTrigger>
 
         <DialogContent className="sm:max-w-md p-4">
-          <FoodCardHeader category={category} />
+          <FoodCardHeader category={category} title="Add new dish to" />
           <FoodCardInputs
             selectedCategory={selectedCategory}
             onSelectCategory={onSelectCategory}
@@ -101,24 +103,19 @@ const AddFoodCard = ({
             categories={categories}
             values={newFood}
           />
-
+          <CldUpload />
           <DialogFooter className="sm:justify-end">
             <Button
               onClick={onAddFoodCard}
               disabled={loading}
-              type="button"
-              className="bg-red-500 hover:bg-red-400 text-white cursor-pointer"
+              className="flex items-center cursor-pointer gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150"
             >
-              {loading ? (
-                <LoaderCircle className="animate-spin" />
-              ) : (
-                "Add Food "
-              )}
+              {loading ? <LoaderCircle className="animate-spin" /> : "Add Food"}
             </Button>
           </DialogFooter>
         </DialogContent>
-      </Dialog>
-    </section>
+      </section>
+    </Dialog>
   );
 };
 export default AddFoodCard;

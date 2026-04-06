@@ -34,7 +34,7 @@ const UpdateFoodCard = ({
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const { id, foodName, price, ingredients, image } = food;
+  const { id } = food;
 
   const [updatedFood, setUpdatedFood] = useState<UpdatedFoodProps>({
     foodName: food.foodName,
@@ -113,7 +113,7 @@ const UpdateFoodCard = ({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <FoodCardHeader category={category} />
+      <FoodCardHeader category={category} title="Update the dish in" />
       <UpdatedFoodCardInputs
         selectedCategory={selectedCategory}
         values={updatedFood}
@@ -126,7 +126,7 @@ const UpdateFoodCard = ({
         <Button
           disabled={deleteLoading}
           onClick={onDeleteFood}
-          className="bg-red-500 hover:bg-red-400 text-white"
+          className="flex items-center gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium py-2 px-2.5 rounded-full transition-all duration-150"
         >
           {deleteLoading ? (
             <LoaderCircle className="animate-spin" />
@@ -139,7 +139,7 @@ const UpdateFoodCard = ({
           onClick={onUpdatedFood}
           disabled={loading}
           type="button"
-          className="bg-red-500 hover:bg-red-400 text-white"
+          className="flex items-center gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150"
         >
           {loading ? (
             <LoaderCircle className="animate-spin" />
