@@ -14,7 +14,6 @@ import { Category } from "@/app/lib/types/categoriesTypes";
 import { useRouter } from "next/navigation";
 import { FoodCardInputs } from "./__component/FoodCardInputs";
 import { FoodCardHeader } from "./__component/FoodCardHeader";
-import CldUpload from "@/app/components/CldUpload";
 
 type AddFoodCardProps = {
   category: Category;
@@ -55,6 +54,9 @@ const AddFoodCard = ({
     setNewFood({ ...newFood, foodCategoryId: foodCategoryId });
   };
 
+  const onUploadedImage = (url: string) => {
+    setNewFood((prev) => ({ ...prev, image: url }));
+  };
   const onAddFoodCard = async () => {
     setLoading(true);
 
@@ -102,8 +104,8 @@ const AddFoodCard = ({
             onHandleChange={onHandleChange}
             categories={categories}
             values={newFood}
+            onUploadedImage={onUploadedImage}
           />
-          <CldUpload />
           <DialogFooter className="sm:justify-end">
             <Button
               onClick={onAddFoodCard}

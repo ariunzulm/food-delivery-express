@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label";
 import { ChangeEventHandler } from "react";
 import { CategoryDropDown } from "./CategoryDropDown";
 import { Category } from "@/app/lib/types/categoriesTypes";
+import { CldUpload } from "@/app/components/CldUpload";
 
 type FoodNameProps = {
   onHandleChange: ChangeEventHandler<HTMLInputElement>;
@@ -15,6 +16,7 @@ type FoodNameProps = {
     image: string;
   };
   onSelectCategory: (foodCategoryId: number) => void;
+  onUploadedImage: (url: string) => void;
 };
 
 export const UpdatedFoodCardInputs = ({
@@ -23,6 +25,7 @@ export const UpdatedFoodCardInputs = ({
   values,
   selectedCategory,
   onSelectCategory,
+  onUploadedImage,
 }: FoodNameProps) => {
   console.log(categories, "updated");
   return (
@@ -70,15 +73,7 @@ export const UpdatedFoodCardInputs = ({
           placeholder="List ingredients..."
         />
         <Label htmlFor="image">Food image</Label>
-        <Input
-          onChange={onHandleChange}
-          value={values.image}
-          name="image"
-          id="image"
-          type="url"
-          className="w-105 h-35 text-center"
-          placeholder="Drag or drop a food image"
-        />
+        <CldUpload onUpload={onUploadedImage} />
       </div>
     </div>
   );

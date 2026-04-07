@@ -52,7 +52,9 @@ const UpdateFoodCard = ({
   const onSelectCategory = (foodCategoryId: number) => {
     setUpdatedFood({ ...updatedFood, foodCategoryId: foodCategoryId });
   };
-
+  const onUploadedImage = (url: string) => {
+    setUpdatedFood((prev) => ({ ...prev, image: url }));
+  };
   const onUpdatedFood = async () => {
     setLoading(true);
 
@@ -120,6 +122,7 @@ const UpdateFoodCard = ({
         categories={categories}
         onHandleChange={onHandleChange}
         onSelectCategory={onSelectCategory}
+        onUploadedImage={onUploadedImage}
       />
 
       <DialogFooter className="sm:justify-between">
