@@ -1,7 +1,7 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { UserProfile } from "../components/UserProfile";
-import { ModeToggle } from "../components/ModeToggle";
+import { UserProfile } from "../_components/UserProfile";
+import { ModeToggle } from "../_components/ModeToggle";
 
 export default function DashboatdLayout({
   children,

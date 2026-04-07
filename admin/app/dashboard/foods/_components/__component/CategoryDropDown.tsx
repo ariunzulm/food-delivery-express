@@ -1,6 +1,6 @@
 "use client";
 
-import { Category } from "@/app/lib/types/categoriesTypes";
+import { Category } from "@/app/_lib/types/categoriesTypes";
 
 import {
   Select,

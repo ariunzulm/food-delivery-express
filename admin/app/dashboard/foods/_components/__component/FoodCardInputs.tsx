@@ -2,8 +2,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEventHandler } from "react";
 import { CategoryDropDown } from "./CategoryDropDown";
-import { Category } from "@/app/lib/types/categoriesTypes";
-import { CldUpload } from "@/app/components/CldUpload";
+import { Category } from "@/app/_lib/types/categoriesTypes";
+import { CldUpload } from "@/app/_components/CldUpload";
 
 type FoodNameProps = {
   onHandleChange: ChangeEventHandler<HTMLInputElement>;

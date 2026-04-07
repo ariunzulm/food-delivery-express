@@ -1,4 +1,4 @@
-import { getCategories } from "@/app/lib/servers/get-Categies";
+import { getCategories } from "@/app/_lib/servers/get-Categies";
 import AddedCategoryPage from "./_components/AddedCategoryPage";
 import AddedFoodsPage from "./_components/AddedFoodsPage";
 

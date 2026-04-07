@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getUser } from "../lib/servers/get-users";
+import { getUser } from "../_lib/servers/get-users";
 
 export const UserProfile = async () => {
   const { user } = await getUser();

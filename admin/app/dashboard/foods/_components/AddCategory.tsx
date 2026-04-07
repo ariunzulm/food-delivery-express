@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { Category } from "@/app/lib/types/categoriesTypes";
+import { Category } from "@/app/_lib/types/categoriesTypes";
 
 const AddCategory = () => {
   const [newCategory, setNewCategory] = useState("");

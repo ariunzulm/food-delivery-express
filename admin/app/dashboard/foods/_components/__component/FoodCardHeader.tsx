@@ -1,4 +1,4 @@
-import { Category } from "@/app/lib/types/categoriesTypes";
+import { Category } from "@/app/_lib/types/categoriesTypes";
 import { DialogHeader } from "@/components/ui/dialog";
 type FoodCardHeaderProps = {
   category: Category;

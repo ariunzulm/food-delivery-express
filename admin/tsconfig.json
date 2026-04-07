@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-, "app/components/CldUpload.tsx"  ],
+    "**/*.mts",
+    "app/_components/CldUpload.tsx"
+  ],
   "exclude": ["node_modules"]
 }

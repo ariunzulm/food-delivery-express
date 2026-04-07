@@ -7,7 +7,7 @@ import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
 
 import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
-import { NomNomLogo } from "@/app/components/NomNomLogo";
+import { NomNomLogo } from "@/app/_components/NomNomLogo";
 
 export function AppSidebar() {
   const pathName = usePathname();

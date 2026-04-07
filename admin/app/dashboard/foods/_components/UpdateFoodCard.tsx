@@ -3,7 +3,7 @@
 import { Dialog, DialogFooter } from "@/components/ui/dialog";
 import { LoaderCircle, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Category, Food } from "@/app/lib/types/categoriesTypes";
+import { Category, Food } from "@/app/_lib/types/categoriesTypes";
 import { ChangeEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -40,7 +40,7 @@ const UpdateFoodCard = ({
     foodName: food.foodName,
     price: food.price,
     ingredients: food.ingredients,
-    image: food.image ?? "",
+    image: food.image,
     foodCategoryId: selectedCategory && food.foodCategoryId,
   });
   const router = useRouter();

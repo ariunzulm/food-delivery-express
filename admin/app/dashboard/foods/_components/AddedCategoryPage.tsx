@@ -1,5 +1,5 @@
 import AddCategory from "./AddCategory";
-import { Category } from "@/app/lib/types/categoriesTypes";
+import { Category } from "@/app/_lib/types/categoriesTypes";
 
 type AddedCategoryPageProps = {
   categories: Category[];

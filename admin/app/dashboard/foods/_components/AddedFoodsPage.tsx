@@ -1,7 +1,7 @@
 import AddFoodCard from "./AddFoodCard";
 
-import FoodCard from "@/app/components/FoodCard";
-import { Category } from "@/app/lib/types/categoriesTypes";
+import FoodCard from "@/app/_components/FoodCard";
+import { Category } from "@/app/_lib/types/categoriesTypes";
 
 type AddedFoodsPageProps = {
   categories: Category[];

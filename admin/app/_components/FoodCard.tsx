@@ -1,4 +1,4 @@
-import { Category, Food } from "../lib/types/categoriesTypes";
+import { Category, Food } from "../_lib/types/categoriesTypes";
 import { Edit } from "lucide-react";
 import UpdateFoodCard from "../dashboard/foods/_components/UpdateFoodCard";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -45,10 +45,10 @@ const FoodCard = ({
             <span className="text-base font-bold text-red-500">${price}</span>
 
             <DialogTrigger>
-              <button className="flex items-center cursor-pointer gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150">
+              <div className="flex items-center cursor-pointer gap-1 bg-red-500 hover:bg-red-600 active:scale-95 text-white text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-150">
                 <Edit size={13} strokeWidth={2.5} />
                 Update
-              </button>
+              </div>
             </DialogTrigger>
           </div>
         </div>

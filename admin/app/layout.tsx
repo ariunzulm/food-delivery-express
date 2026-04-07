@@ -2,8 +2,8 @@
 
 import "./globals.css";
 import { Manrope } from "next/font/google";
-import { ThemeProvider } from "./components/theme-provider";
-import ToastProvider from "./components/ToastProvider";
+import { ThemeProvider } from "./_components/theme-provider";
+import ToastProvider from "./_components/ToastProvider";
 
 const manrope = Manrope({
   subsets: ["latin"],

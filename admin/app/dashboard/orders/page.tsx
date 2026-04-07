@@ -1,4 +1,4 @@
-import { getOrders } from "@/app/lib/servers/get-Orders";
+import { getOrders } from "@/app/_lib/servers/get-Orders";
 import {
   Table,
   TableBody,
@@ -26,9 +26,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { getUsers } from "@/app/lib/servers/get-users";
-import { FoodOrderItem, Order } from "@/app/lib/types/ordersTypes";
-import { User } from "@/app/lib/types/usersTypes";
+import { getUsers } from "@/app/_lib/servers/get-users";
+import { FoodOrderItem, Order } from "@/app/_lib/types/ordersTypes";
+import { User } from "@/app/_lib/types/usersTypes";
 
 const tableColumns = [
   "№",

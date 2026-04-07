@@ -10,10 +10,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Category } from "@/app/lib/types/categoriesTypes";
+import { Category } from "@/app/_lib/types/categoriesTypes";
 import { useRouter } from "next/navigation";
 import { FoodCardInputs } from "./__component/FoodCardInputs";
 import { FoodCardHeader } from "./__component/FoodCardHeader";
+import { addFood } from "@/app/_lib/servers/add-food";
 
 type AddFoodCardProps = {
   category: Category;
@@ -61,19 +62,7 @@ const AddFoodCard = ({
     setLoading(true);
 
     try {
-      await fetch("https://food-delivery-server-wdw6.onrender.com/foods", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          foodName: newFood.foodName,
-          price: newFood.price,
-          image: newFood.image,
-          ingredients: newFood.ingredients,
-          foodCategoryId: category.id,
-        }),
-      });
+      await addFood(newFood, category);
       router.refresh();
       setOpen(false);
     } catch (error) {
