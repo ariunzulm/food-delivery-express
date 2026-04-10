@@ -10,8 +10,8 @@ import {
 import { getUser } from "../_lib/servers/get-users";
 
 export const UserProfile = async () => {
-  // const { users } = await getUser();
-
+  const user = await getUser();
+  console.log(user, "user");
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -26,11 +26,9 @@ export const UserProfile = async () => {
       <DropdownMenuContent className="w-32">
         <DropdownMenuGroup>
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>
-            {/* {users.flatMap((user) => user.email)} */}
-          </DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem>{user.email}</DropdownMenuItem>
+          <DropdownMenuItem>{user.email}</DropdownMenuItem>
+          <DropdownMenuItem>{user.role}</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>

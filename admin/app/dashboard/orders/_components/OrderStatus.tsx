@@ -1,55 +1,75 @@
+"use client";
+
+import { updateOrders } from "@/app/_lib/servers/update-order";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
 
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Order } from "@/app/_lib/types/ordersTypes";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type OrderStatusProps = {
-  orders: Order[];
-  user: number;
+  orderId: number;
+  orderStatus: string;
 };
 
-export const OrderStatus = ({ orders, user }: OrderStatusProps) => {
-  const status = ["PENDING", "DELIVERED", "CANCELED"];
-  console.log(orders, "g");
+export const OrderStatus = ({ orderId, orderStatus }: OrderStatusProps) => {
+  const [status, setStatus] = useState(orderStatus);
+  const router = useRouter();
+  const onHandleChange = async (status: string) => {
+    setStatus(status);
+
+    await updateOrders(orderId, status);
+    router.refresh();
+  };
+  const onCancel = () => {
+    setStatus(orderStatus);
+    router.refresh();
+  };
+
   return (
-    <Dialog>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          {orders.map((order) => (
-            <div
-              key={order.id}
-              className="border border-gray-200 rounded p-2 flex justify-between text-sm"
-            >
-              {order.status}
-            </div>
-          ))}
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-fit p-2">
-          <DialogDescription className="space-y-2">
-            {status.map((st, i) => (
-              <div key={i} className="p-1 text-sm">
-                {st}
-              </div>
-            ))}
-          </DialogDescription>
-          <DialogFooter className="text-sm">
-            <DialogClose>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Save</Button>
-          </DialogFooter>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </Dialog>
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <div
+          key={orderId}
+          className="border border-gray-200 rounded p-2 flex justify-between text-sm"
+        >
+          {status}
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-fit p-2">
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Status</DropdownMenuLabel>
+          <DropdownMenuCheckboxItem
+            checked={status === "PENDING"}
+            onCheckedChange={() => onHandleChange("PENDING")}
+          >
+            PENDING
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem
+            checked={status === "DELIVERED"}
+            onCheckedChange={() => onHandleChange("DELIVERED")}
+          >
+            DELIVERED
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem
+            checked={status === "CANCELED"}
+            onCheckedChange={() => onHandleChange("CANCELED")}
+          >
+            CANCELED
+          </DropdownMenuCheckboxItem>
+        </DropdownMenuGroup>
+
+        <Button variant="outline" onClick={onCancel} className="w-full">
+          Cancel
+        </Button>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

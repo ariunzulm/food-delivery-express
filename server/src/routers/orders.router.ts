@@ -17,8 +17,9 @@ router.get("/:id", authMiddleware, adminMiddleware, getOrderById);
 router.post("/", authMiddleware, createNewOrder);
 
 router.delete("/:id", authMiddleware, adminMiddleware, deleteOrderById);
-router.put("/:id", authMiddleware, adminMiddleware, updatedOrderById);
+// router.put("/:id", authMiddleware, adminMiddleware, updatedOrderById);
 
+router.put("/:id", authMiddleware, updatedOrderById);
 router.get("/:id", authMiddleware, getOrderByUser);
 
 export default router;

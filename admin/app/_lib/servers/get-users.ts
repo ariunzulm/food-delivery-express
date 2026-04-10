@@ -1,8 +1,13 @@
 import { cookies } from "next/headers";
-import { User, UsersRoot } from "../types/usersTypes";
+import { UsersRoot } from "../types/usersTypes";
 
-type GetUserResponse = {
-  user: UsersRoot;
+type User = {
+  id: number;
+  email: string;
+  confirmPassword: string;
+  phoneNumber: string;
+  role: string;
+  age: number;
 };
 
 export const getUser = async () => {
@@ -19,25 +24,6 @@ export const getUser = async () => {
       },
     },
   );
-  const users = (await response.json()) as GetUserResponse;
-
-  return users.user;
-};
-
-type UsersProps = {
-  users: UsersRoot;
-};
-
-export const getUsers = async () => {
-  try {
-    const response = await fetch(
-      "https://food-delivery-server-wdw6.onrender.com/users",
-    );
-
-    const users = (await response.json()) as UsersProps;
-
-    return users.users;
-  } catch (error) {
-    console.log(error);
-  }
+  const user = (await response.json()) as User;
+  return user;
 };

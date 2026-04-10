@@ -1,5 +1,4 @@
-export interface OrdersRoot{
-  message: string;
+export interface OrdersRoot {
   orders: Order[];
 }
 

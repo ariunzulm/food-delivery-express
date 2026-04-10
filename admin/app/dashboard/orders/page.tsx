@@ -9,8 +9,10 @@ import {
 
 import { OrderStatus } from "./_components/OrderStatus";
 import { getOrders } from "@/app/_lib/servers/get-Orders";
+import { Input } from "@/components/ui/input";
 
 const tableColumns = [
+  "",
   "№",
   "Customer",
   "Food",
@@ -22,7 +24,8 @@ const tableColumns = [
 
 const OrdersPage = async () => {
   const orders = await getOrders();
-  console.log(orders, "orders page");
+  console.log(orders);
+
   return (
     <Table className="max-w-250 mx-auto p-10">
       <TableHeader>
@@ -41,33 +44,26 @@ const OrdersPage = async () => {
       </TableHeader>
 
       <TableBody>
-        {/* {orders?.map((order, index) => {
+        {orders?.map((order, index) => {
           return (
             <TableRow key={index}>
+              <TableCell>
+                <Input type="checkbox" className="w-4" />
+              </TableCell>
               <TableCell>{index + 1}</TableCell>
               <TableCell>{order.user.email}</TableCell>
+              <TableCell>Food detail</TableCell>
+              <TableCell>{order.totalPrice}</TableCell>
               <TableCell>
-                {order.foodOrderItems.map(
-                  (order) => order.quantity.toString().split(" ")[0],
-                )}
+                {new Date(order.createdAt).toLocaleString()}
               </TableCell>
+              <TableCell>{order.user.phoneNumber}</TableCell>
               <TableCell>
-                {order.foodOrderItems.map((order) =>
-                  new Date(order.createdAt).toLocaleString(),
-                )}
-              </TableCell>
-              <TableCell>
-                {<div key={order.id}>$ {order.totalPrice}</div>}
-              </TableCell>
-              <TableCell>
-                {<div key={order.id}>{order.id} address</div>}
-              </TableCell>
-              <TableCell>
-                <OrderStatus orders={orders} user={order.userId} />
+                <OrderStatus orderId={order.id} orderStatus={order.status} />
               </TableCell>
             </TableRow>
           );
-        })} */}
+        })}
       </TableBody>
     </Table>
   );
