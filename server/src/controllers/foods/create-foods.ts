@@ -20,8 +20,7 @@ export const createFood = async (req: Request, res: Response) => {
         foodCategoryId,
       },
     });
-    console.log(newFood);
-    
+
     res.status(201).json({ message: "Food added successfully", newFood });
   } catch (error) {
     if (error instanceof Error && "code" in error && error.code === "P2003") {

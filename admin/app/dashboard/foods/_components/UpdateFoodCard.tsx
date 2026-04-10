@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog, DialogFooter } from "@/components/ui/dialog";
-import { LoaderCircle, TrashIcon } from "lucide-react";
+import { CurrencyIcon, LoaderCircle, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Category, Food } from "@/app/_lib/types/categoriesTypes";
 import { ChangeEventHandler, useState } from "react";
@@ -44,6 +44,7 @@ const UpdateFoodCard = ({
     foodCategoryId: selectedCategory && food.foodCategoryId,
   });
   const router = useRouter();
+
   const onHandleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { name, value } = event.target;
     setUpdatedFood((prev) => ({ ...prev, [name]: value }));
@@ -55,6 +56,7 @@ const UpdateFoodCard = ({
   const onUploadedImage = (url: string) => {
     setUpdatedFood((prev) => ({ ...prev, image: url }));
   };
+
   const onUpdatedFood = async () => {
     setLoading(true);
 
@@ -123,6 +125,7 @@ const UpdateFoodCard = ({
         onHandleChange={onHandleChange}
         onSelectCategory={onSelectCategory}
         onUploadedImage={onUploadedImage}
+        currentImage={updatedFood.image}
       />
 
       <DialogFooter className="sm:justify-between">

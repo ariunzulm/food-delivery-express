@@ -10,7 +10,7 @@ export const authMiddleware = async (
   const { authorization } = req.headers;
 
   if (!authorization) {
-    return res.status(400).json({ message: "Invalid credential" });
+    return res.status(400).json({ message: "Invalid authorization" });
   }
 
   const accessToken = authorization?.split(" ")[1];
@@ -24,9 +24,10 @@ export const authMiddleware = async (
     const decoded = jwt.verify(accessToken, jwtSecret) as TokenType;
 
     req.user = decoded.data;
-    // res.status(200).json({ message: "Valid authentification??" });
+    res.status(200).json({ message: "Valid authentification" });
 
     next();
+    
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "Invalid authentification" });

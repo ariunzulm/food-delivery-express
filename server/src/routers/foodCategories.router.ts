@@ -12,4 +12,5 @@ router.get("/:id", getFoodCategoryById);
 router.post("/", createFoodCategory);
 router.put("/:id", updateFoodCategoryById);
 router.delete("/:id", deleteFoodCategoryById);
+
 export default router;

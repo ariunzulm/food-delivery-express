@@ -9,6 +9,7 @@ type FoodNameProps = {
   onHandleChange: ChangeEventHandler<HTMLInputElement>;
   categories: Category[];
   selectedCategory: number;
+  currentImage: string;
   values: {
     foodName: string;
     price: string;
@@ -26,10 +27,11 @@ export const UpdatedFoodCardInputs = ({
   selectedCategory,
   onSelectCategory,
   onUploadedImage,
+  currentImage,
 }: FoodNameProps) => {
-  console.log(categories, "updated");
+ 
   return (
-    <div className="flex items-center gap-2 max-w-md mx-auto">
+    <div className="flex items-center gap-2 w-full mx-auto">
       <div className="grid flex-1 gap-4">
         <div className="flex flex-col gap-2">
           <Label htmlFor="foodName">Food name</Label>
@@ -73,7 +75,7 @@ export const UpdatedFoodCardInputs = ({
           placeholder="List ingredients..."
         />
         <Label htmlFor="image">Food image</Label>
-        <CldUpload onUpload={onUploadedImage} />
+        <CldUpload onUpload={onUploadedImage} currentImage={currentImage} />
       </div>
     </div>
   );

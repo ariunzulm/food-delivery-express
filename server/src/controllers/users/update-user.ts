@@ -6,7 +6,7 @@ export const updateUserById = async (req: Request, res: Response) => {
   const { email, password, phoneNumber, age, role } = req.body;
 
   if (!id) {
-    return res.status(400).json({ message: "Invalid ID" });
+    return res.status(400).json({ message: "A user is not found." });
   }
   try {
     const user = await prisma.user.update({

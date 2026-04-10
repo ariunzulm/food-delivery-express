@@ -11,13 +11,13 @@ import { authMiddleware } from "../controllers/middleware/auth-Middleware";
 
 const router = express.Router();
 
-router.get("/", authMiddleware, adminMiddleware, getOrders);
+// router.get("/", authMiddleware, getOrders);
+router.get("/", getOrders);
 router.get("/:id", authMiddleware, adminMiddleware, getOrderById);
 router.post("/", authMiddleware, createNewOrder);
-// router.post("/", createNewOrder);
+
 router.delete("/:id", authMiddleware, adminMiddleware, deleteOrderById);
 router.put("/:id", authMiddleware, adminMiddleware, updatedOrderById);
-// router.put("/:id", updatedOrderById);
 
 router.get("/:id", authMiddleware, getOrderByUser);
 

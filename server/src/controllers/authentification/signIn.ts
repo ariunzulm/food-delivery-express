@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import bcrypt, { compare } from "bcrypt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { prisma } from "../../lib/prisma";
 
@@ -18,7 +18,7 @@ export const signIn = async (req: Request, res: Response) => {
     });
 
     if (!userMatched) {
-      return res.status(500).json({ message: "Invalid email" });
+      return res.status(400).json({ message: "Invalid email" });
     }
     console.log({ userMatched });
 
@@ -40,18 +40,18 @@ export const signIn = async (req: Request, res: Response) => {
           },
         },
         jwtSecret,
-        { expiresIn: "1h" },
+        { expiresIn: "7h" },
       );
       return res.status(200).json({ message: "Valid credential", accessToken });
     }
 
     if (!match) {
-      return res.status(500).json({ message: "Invalid email or password" });
+      return res.status(400).json({ message: "Invalid email or password" });
     }
 
     res.status(200).json({ message: "Successfully signed in", match });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Sign in server error" });
   }
 };

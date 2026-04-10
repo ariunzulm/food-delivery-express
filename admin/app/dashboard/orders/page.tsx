@@ -1,4 +1,3 @@
-import { getOrders } from "@/app/_lib/servers/get-Orders";
 import {
   Table,
   TableBody,
@@ -7,28 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
-import { getUsers } from "@/app/_lib/servers/get-users";
-import { FoodOrderItem, Order } from "@/app/_lib/types/ordersTypes";
-import { User } from "@/app/_lib/types/usersTypes";
+import { OrderStatus } from "./_components/OrderStatus";
+import { getOrders } from "@/app/_lib/servers/get-Orders";
 
 const tableColumns = [
   "№",
@@ -41,16 +21,16 @@ const tableColumns = [
 ];
 
 const OrdersPage = async () => {
-  const users = await getUsers();
-
+  const orders = await getOrders();
+  console.log(orders, "orders page");
   return (
-    <Table className="w-full">
+    <Table className="max-w-250 mx-auto p-10">
       <TableHeader>
         <TableRow>
           {tableColumns.map((title) => {
             return (
               <TableHead
-                className="font-extrabold, text-lg text-orange-700"
+                className=" text-lg cursor-pointer px-4 py-2 rounded-full font-medium whitespace-nowrap transition-all duration-150 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-300"
                 key={title}
               >
                 {title}
@@ -59,80 +39,37 @@ const OrdersPage = async () => {
           })}
         </TableRow>
       </TableHeader>
+
       <TableBody>
-        {users?.users.map((user, index) => {
+        {/* {orders?.map((order, index) => {
           return (
             <TableRow key={index}>
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{user.email}</TableCell>
+              <TableCell>{order.user.email}</TableCell>
               <TableCell>
-                {user.foodOrder.map((order) =>
-                  order.foodOrderItems.map(
-                    (item) => item.quantity.toString().split(" ")[0],
-                  ),
+                {order.foodOrderItems.map(
+                  (order) => order.quantity.toString().split(" ")[0],
                 )}
               </TableCell>
               <TableCell>
-                {user.foodOrder.map((order) =>
+                {order.foodOrderItems.map((order) =>
                   new Date(order.createdAt).toLocaleString(),
                 )}
               </TableCell>
               <TableCell>
-                {user.foodOrder.map((order) => {
-                  return <div key={order.id}>$ {order.totalPrice}</div>;
-                })}
+                {<div key={order.id}>$ {order.totalPrice}</div>}
               </TableCell>
               <TableCell>
-                {user.foodOrder.map((order) => {
-                  return <div key={order.id}>{order.id} address</div>;
-                })}
+                {<div key={order.id}>{order.id} address</div>}
               </TableCell>
               <TableCell>
-                <OrderStatusDropDown orders={user.foodOrder} />
+                <OrderStatus orders={orders} user={order.userId} />
               </TableCell>
             </TableRow>
           );
-        })}
+        })} */}
       </TableBody>
     </Table>
   );
 };
-
 export default OrdersPage;
-type OrderStatusDropDownProps = {
-  orders: Order[];
-};
-export const OrderStatusDropDown = ({ orders }: OrderStatusDropDownProps) => {
-  const status = ["PENDING", "DELIVERED", "CANCELED"];
-  return (
-    <Dialog>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          {orders.map((order) => (
-            <div
-              key={order.id}
-              className="border border-gray-200 rounded p-2 flex justify-between text-sm"
-            >
-              {order.status}
-            </div>
-          ))}
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-fit p-2">
-          <DialogDescription className="space-y-2">
-            {status.map((st, i) => (
-              <div key={i} className="p-1 text-sm">
-                {st}
-              </div>
-            ))}
-          </DialogDescription>
-          <DialogFooter className="text-sm">
-            <DialogClose>
-              <Button variant="outline">Cancel</Button>
-            </DialogClose>
-            <Button type="submit">Save</Button>
-          </DialogFooter>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </Dialog>
-  );
-};

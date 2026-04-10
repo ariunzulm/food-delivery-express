@@ -26,9 +26,9 @@ export function FoodCardSheet() {
     <Sheet>
       <SheetTrigger>
         <div className="relative">
-          <button className="relative cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-red-400 transition-colors">
+          <div className="relative cursor-pointer w-10 h-10 rounded-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-red-400 transition-colors">
             <ShoppingCart className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
-          </button>
+          </div>
 
           {cartCount > 0 && (
             <span className="pointer-events-none absolute -top-1 -right-1 min-w-4.5 h-4.5 px-1 rounded-full bg-red-500 text-white text-[10px] font-semibold flex items-center justify-center border-2 border-white dark:border-zinc-900">
@@ -73,10 +73,12 @@ export function FoodCardSheet() {
             Clear all
           </button>
         )}
-        <div className="flex mx-5 items-center gap-2 text-base">
-          <CreditCard className="w-4 h-4 text-red-500" />
-          Payment info
-        </div>
+        {cartCount !== 0 && (
+          <div className="flex mx-5 items-center gap-2 text-base">
+            <CreditCard className="w-4 h-4 text-red-500" />
+            Payment info
+          </div>
+        )}
         {cartCount > 0 && (
           <SheetFooter className="px-5 py-4 border-t border-zinc-100 dark:border-zinc-800 flex-col gap-0">
             <div className="w-full flex flex-col gap-2 mb-4">

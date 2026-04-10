@@ -1,6 +1,7 @@
 import { prisma } from "../../lib/prisma";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
+
 export const createUser = async (req: Request, res: Response) => {
   const { email, password, confirmPassword, phoneNumber, age, role } = req.body;
 

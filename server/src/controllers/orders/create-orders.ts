@@ -25,14 +25,15 @@ export type Foods = {
 export const createNewOrder = async (req: Request, res: Response) => {
   const userId = req.user?.userId!;
   const { orderItems }: BodyType = await req.body;
+
   try {
     if (userId === undefined) {
-      console.log(userId, "undeee");
-      res.status(400).json({ message: "Invalid usedfgbgnkvjgr" });
+      res.status(400).json({ message: "Invalid user" });
       return;
     }
 
     const totalPrice = await calculateTotalPrice(orderItems);
+
     if (!totalPrice) throw error("Price not founded");
 
     const order = await prisma.foodOrder.create({
@@ -44,7 +45,7 @@ export const createNewOrder = async (req: Request, res: Response) => {
         },
       },
     });
-    res.json({ message: "Successfully ordered", order });
+    res.status(200).json({ message: "Successfully items ordered", order });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Unsuccessful order", error });

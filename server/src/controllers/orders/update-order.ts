@@ -11,7 +11,7 @@ export const updatedOrderById = async (req: Request, res: Response) => {
   if (!status) {
     return res.status(400).json({ message: "Status is required" });
   }
-  console.log("efdbgd", status);
+
   try {
     const updatedOrder = await prisma.foodOrder.update({
       where: { id: Number(id) },

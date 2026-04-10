@@ -1,6 +1,17 @@
-export type Categories = Category[];
+export interface CategoriesRoot {
+  message: string;
+  categories: Category[];
+}
 
-export type Food = {
+export interface Category {
+  id: number;
+  categoryName: string;
+  createdAt: string;
+  updatedAt: string;
+  foods: Food[];
+}
+
+export interface Food {
   id: number;
   foodName: string;
   price: string;
@@ -9,12 +20,4 @@ export type Food = {
   foodCategoryId: number;
   createdAt: string;
   updatedAt: string;
-};
-
-export type Category = {
-  id: number;
-  categoryName: string;
-  createdAt: string;
-  updatedAt: string;
-  foods: Food[];
-};
+}

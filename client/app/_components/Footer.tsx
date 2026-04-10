@@ -1,8 +1,11 @@
 import { Mail, MapPin, PhoneCall } from "lucide-react";
 import Link from "next/link";
 import { NomNomLogo } from "./NomNomLogo";
+import { getSupportedBrowsers } from "next/dist/build/get-supported-browsers";
+import { getCategories } from "../lib/servers/get-Categies";
 
-export default function Footer() {
+const Footer = async () => {
+  const categories = await getCategories();
   return (
     <footer className="relativeoverflow-hidden pt-15">
       <div className="bg-red-500 h-23 w-full flex items-center justify-between overflow-hidden">
@@ -75,24 +78,15 @@ export default function Footer() {
             <h3 className="text-xs font-semibold tracking-widest text-red-500 uppercase">
               Menu
             </h3>
+
             <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
-              {[
-                { label: "Appetizers", href: "/" },
-                { label: "Desserts", href: "/" },
-                { label: "Salads", href: "/" },
-                { label: "Side Dishes", href: "/" },
-                { label: "Pizzas", href: "/" },
-                { label: "Brunch", href: "/" },
-                { label: "Main Dishes", href: "/" },
-                { label: "Beverages", href: "/" },
-                { label: "Fish & Seafood", href: "/" },
-              ].map(({ label, href }) => (
+              {categories.map(({ categoryName }) => (
                 <Link
-                  key={label}
-                  href={href}
+                  key={categoryName}
+                  href="/"
                   className="text-sm text-zinc-400 hover:text-red-300 transition-colors duration-150"
                 >
-                  {label}
+                  {categoryName}
                 </Link>
               ))}
             </div>
@@ -115,4 +109,5 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+export default Footer;

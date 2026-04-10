@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 
 export const updateFoodCategoryById = async (req: Request, res: Response) => {
   const { id } = req.params;
+  
   if (!id) {
     return res.status(400).json({ message: "Invalid ID" });
   }

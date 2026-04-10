@@ -9,10 +9,8 @@ export const createFoodCategory = async (req: Request, res: Response) => {
         categoryName,
       },
     });
-    console.log(category);
 
-    console.log(category, "efvmkefvm");
-    res.status(200).json({ message: "Added food categories", category });
+    res.status(200).json({ message: "Successfully added food categories", category });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });

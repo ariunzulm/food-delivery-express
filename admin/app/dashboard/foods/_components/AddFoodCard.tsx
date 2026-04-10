@@ -49,7 +49,6 @@ const AddFoodCard = ({
     const { name, value } = event.target;
 
     setNewFood((prev) => ({ ...prev, [name]: value }));
-    console.log({ ...newFood, [name]: value });
   };
   const onSelectCategory = (foodCategoryId: number) => {
     setNewFood({ ...newFood, foodCategoryId: foodCategoryId });

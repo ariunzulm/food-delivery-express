@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
-import { User } from "../types/usersTypes";
+import { User, UsersRoot } from "../types/usersTypes";
 
 type GetUserResponse = {
-  user: User;
+  user: UsersRoot;
 };
 
 export const getUser = async () => {
@@ -19,13 +19,13 @@ export const getUser = async () => {
       },
     },
   );
-  const user = (await response.json()) as GetUserResponse;
+  const users = (await response.json()) as GetUserResponse;
 
-  return user;
+  return users.user;
 };
 
 type UsersProps = {
-  users: User[];
+  users: UsersRoot;
 };
 
 export const getUsers = async () => {
@@ -36,7 +36,7 @@ export const getUsers = async () => {
 
     const users = (await response.json()) as UsersProps;
 
-    return users;
+    return users.users;
   } catch (error) {
     console.log(error);
   }
